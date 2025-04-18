@@ -1,0 +1,151 @@
+
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar{
+    height: 85px;
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    box-shadow: 0 1px 3px -2px black;
+    
+  }
+  
+  .navlogo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  
+  }
+  .navlogo a{
+    text-decoration: none;
+    color: #171717
+  }
+  .navlogo p{
+    color: #171717;
+    font-size: 42px;
+    font-weight: 600px;
+  }
+  
+  .navlogo img{
+    height:90px;
+    width: 90px;
+  }
+  
+  
+  .nav-menu{
+    display: flex; 
+    align-items: center;
+    list-style:none;
+    gap:50px;
+    color: #626262;
+    font-size: 20px;
+    font-weight: 500px;
+  }
+  
+  
+  
+  
+  .nav-menu li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  .nav-menu li a{
+  text-decoration: none;
+  color: #626262;
+  }
+  .search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+  }
+  .search-bar input {
+    width: 250px;
+    height: 30px;
+    padding: 10px 35px 10px 15px;
+    border-radius: 40px;
+    border-color: rgb(29, 28, 28);
+    
+    outline: none;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+  }
+  
+  .search-bar .search-icon {
+    position: absolute;
+    right: 12px;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .login-signup{
+    display: flex;
+    align-items: center;
+  }
+  .login-signup button{
+    width: 120px;
+    height: 50px;
+    outline: none;
+    border: none;
+    border-radius:95px;
+    color:#fff;
+    font-size:20px;
+    background-color: #2C9CF0 ;
+    cursor: pointer;
+  }
+  .login-signup button a{
+  text-decoration: none;
+  color: #fff;
+  }
+  
+  .login-signup button:hover {
+    background-color: #1b7dc4; 
+    font-size: 19px; 
+  }
+  
+  .log-in-btn{
+    background-color: #FF9494
+  }
+   
+  .log-in-btn a{
+    color: #fff;
+  }
+  
+  .log-in-btn:hover {
+      background-color: #e17f7f; 
+      font-size: 19px; 
+      color: #fff;
+  }
+  .log-out-btn{
+    background-color: #9DB2BF;
+  }
+  .log-out-btn  a{
+     
+    color: #526D82 ;
+  }
+  
+  .log-out-btn:hover {
+    background-color: darkred;
+    font-size: 19px;
+  }
+  
+  .profile-icon {
+    margin-left: 15px;
+    font-size: 32px;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .profile-icon:hover {
+    color: #4aa4ea;
+  } 
