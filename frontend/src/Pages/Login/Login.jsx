@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
 import { Link } from 'react-router-dom';
@@ -11,10 +11,13 @@ const Login = () => {
     password: ''
   });
 
+
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { loginUser } = useAuth();
+  const { loginUser ,isLoggedIn} = useAuth();
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,10 +51,9 @@ const Login = () => {
         loginUser({
           token: response.data.token,
           email: loginData.email,
-          role: response.data.role
-          
+          role: response.data.user.role,
         });
-           navigate('/');
+        
       } else {
         throw new Error('Invalid response from server');
       }
@@ -62,6 +64,13 @@ const Login = () => {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn]);
+  
 
   return (
     <div className='login-page'>

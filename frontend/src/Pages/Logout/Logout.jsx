@@ -1,9 +1,23 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Logout = () => {
-  return (
-    <div>Logout</div>
-  )
-}
+  const { logoutUser } = useAuth();
+  const navigate = useNavigate();
 
-export default Logout
+  useEffect(() => {
+    toast.success("You've successfully logged out!", { autoClose: 3000 });
+
+    setTimeout(() => {
+      logoutUser(); 
+      navigate("/login", { replace: true }); 
+    }, 3000);
+  }, [logoutUser, navigate]);
+
+  return <div>Logging out...</div>;
+};
+
+export default Logout;

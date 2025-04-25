@@ -51,11 +51,7 @@ const SignUp = () => {
       });
 
       console.log("Signup successful:", response.data);
-      loginUser({
-        token: response.data.token,
-         email: signupData.email,
-        role: response.data.role
-       });
+
       navigate('/login'); 
     } catch (err) {
       console.error("Signup error:", err.response?.data);
