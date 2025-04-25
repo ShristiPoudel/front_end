@@ -39,7 +39,7 @@ const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
     </div>

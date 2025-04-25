@@ -7,10 +7,10 @@ import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
+     <AuthProvider> 
       {/* <SearchProvider> */}
         <App />
       {/* </SearchProvider> */}
-    </AuthProvider>
+     </AuthProvider> 
   </StrictMode>
 );

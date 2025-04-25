@@ -1,33 +1,23 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./login.css";
+import "./Login.css";
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'
-import api from '../../api/config'
-
-
+import api from '../../api/config';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
-  
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { loginUser,isLoggedIn } = useAuth();
-  
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, [isLoggedIn, navigate]);
- 
-  
+  const { loginUser } = useAuth();
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setLoginData(prev => ({
       ...prev,
       [name]: value
@@ -35,7 +25,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("form sumitted");
+    console.log("Form Submitted")
     e.preventDefault();
     setError('');
 
@@ -43,27 +33,31 @@ const Login = () => {
       return setError('Please fill in all fields');
     }
 
-
     try {
       setIsSubmitting(true);
       const response = await api.post("/user/login/", {
         email: loginData.email,
         password: loginData.password
       });
-     
 
+      // Assuming  API returns token, email, and role in the response
       console.log("Login successful:", response.data);
-      loginUser({
-        token: response.data.token,
-        email: loginData.email,
-        role: response.data.role,
-        isLoggedIn: true
-        
-      });
-      navigate("/");
+
+      if (response.data && response.data.token) {
+
+        loginUser({
+          token: response.data.token,
+          email: loginData.email,
+          role: response.data.role
+          
+        });
+           navigate('/');
+      } else {
+        throw new Error('Invalid response from server');
+      }
     } catch (err) {
       console.error("Login error:", err.response?.data);
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -74,9 +68,8 @@ const Login = () => {
       <div className='login'>
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
-        
         <form className='login-form' onSubmit={handleSubmit}>
- <div className='login-input-fields'> 
+          <div className='login-input-fields'> 
             <label htmlFor="email">Enter your email:</label>
             <input
               type="email"
@@ -107,14 +100,14 @@ const Login = () => {
           <div className="login-btn">
             <button
               type="submit"
-              // disabled={isSubmitting || !loginData.agreed}
+              disabled={isSubmitting}
             >
-              {isSubmitting ? 'Processing...' : 'Continue'}
+              {isSubmitting ? 'Logging in...' : 'Login'}
             </button>
           </div>
         </form>
         <p>
-         Don't have an account? <Link to="/sign-up">Sign Up</Link>
+          Don't have an account? <Link to="/sign-up">Sign Up</Link>
         </p>
       </div>
     </div>
