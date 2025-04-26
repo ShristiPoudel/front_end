@@ -3,7 +3,7 @@ import ImageSlider, { Slide } from "react-auto-image-slider";
 import hero from '../../assets/hero-image.jpg'
  import seminar from '../../assets/seminar.jpg'
 import sports from '../../assets/sports.jpg'
-import "./Hero.css"
+import "./hero.css"
 
 
 

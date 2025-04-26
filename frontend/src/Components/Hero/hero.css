@@ -1,40 +1,124 @@
+.hero-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px auto; 
+  padding: 0 15px;
+  box-sizing: border-box;
+}
 
-* {
-    margin: 0;
-    padding: 0;
+.hero {
+  position: relative;
+  width: 100%;
+  height: 80vh; 
+  max-height: 700px;
+  min-height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 20px 0;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.book-now-container {
+  position: absolute;
+  top:180px;
+  left: 50px;
+  z-index: 10;
+  color: white;
+  /* text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); */
+  max-width: 400px;
+}
+
+.book-now-container h2 {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.book-now-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  height: 55px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8); 
+  color: #333; 
+  border: 2px solid #fff;
+  border-radius: 25px;
+  margin-top: 15px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.book-now-btn:hover {
+  background-color: #fff;
+  color: #0e0f0f; 
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero-container {
+    margin: 30px auto;
+  }
+  
+  .hero {
+    height: 60vh;
+    margin: 15px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    margin: 25px auto;
+    padding: 0 15px;
+  }
+  
+  .hero {
+    height: 55vh;
+    min-height: 400px;
   }
   
   .book-now-container {
-    position: absolute;
-    top: 60%;
-    left: 5%;
-    transform: translateY(-50%);
-    text-align: left;
-    color: white;
+    left: 30px;
+    bottom: 30px;
+    max-width: 300px;
   }
   
   .book-now-container h2 {
-    margin-top:10px;
-    font-size: 48px;
-    font-weight: bold;
-    color:white;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    margin: 20px auto;
+    padding: 0 12px;
+  }
+  
+  .hero {
+    height: 50vh;
+    min-height: 350px;
+    margin: 10px 0;
+  }
+  
+  .book-now-container {
+    left: 20px;
+    bottom: 20px;
+    max-width: 250px;
+  }
+  
+  .book-now-container h2 {
+    font-size: 1.5rem;
   }
   
   .book-now-btn {
-    padding: 12px 25px;
-    font-size: 18px;
-    height: 55px;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: #333; 
-    border: 2px solid #fff;
-    border-radius: 25px;
-    margin-top: 120px;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 10px 20px;
+    font-size: 1rem;
   }
-  
-  .book-now-btn:hover {
-    background-color: #fff;
-    color: #007bff; 
-  }
-  
+}

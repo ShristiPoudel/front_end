@@ -42,10 +42,10 @@ const NavBar = () => {
          
       </ul>
 
-      <div className="search-bar">
+      {/* <div className="search-bar">
         <input type="text" placeholder="Search events..." />
         <FaSearch className="search-icon" />
-      </div>
+      </div> */}
 
       <div className="login-signup">
         {!isLoggedIn ? (

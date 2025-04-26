@@ -1,0 +1,87 @@
+.create-container{
+    padding:30px;
+    }
+    .create-event {
+      width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #f9f9f9;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    
+    .create-event h1 {
+      text-align: center;
+      font-size: 26px;
+       font-weight: bold; 
+      color: #333;
+      margin-bottom: 25px;
+    }
+    
+    
+    .post-event-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    
+    .form-group label {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+      color:rgb(26, 26, 26);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+    
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .form-group input[type="file"] {
+      border: none;
+      padding: 5px;
+    }
+    
+    .post {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .post button {
+      background-color: #2C9CF0;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      height: 50px;
+      cursor: pointer;
+    }
+    
+    .post button:hover {
+      background-color: #1b7dc4; 
+      font-size: 14px; 
+    }
+    

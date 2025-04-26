@@ -5,7 +5,7 @@
   }
   
   .navbar{
-    height: 85px;
+    height: 65px;
     display: flex;
     justify-content: space-around;
     padding: 16px;
@@ -112,31 +112,18 @@
     font-size: 19px; 
   }
   
-  .log-in-btn{
-    background-color: #FF9494
-  }
-   
+ 
   .log-in-btn a{
     color: #fff;
   }
   
-  .log-in-btn:hover {
-      background-color: #e17f7f; 
-      font-size: 19px; 
-      color: #fff;
-  }
-  .log-out-btn{
-    background-color: #9DB2BF;
-  }
+
   .log-out-btn  a{
      
     color: #526D82 ;
   }
   
-  .log-out-btn:hover {
-    background-color: darkred;
-    font-size: 19px;
-  }
+ 
   
   .profile-icon {
     margin-left: 15px;
