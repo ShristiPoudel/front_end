@@ -127,8 +127,6 @@
 
 
 
-
-/* Discovery Filter - 70% width version */
 .discovery-filter {
   background: white;
   padding: 20px 30px;
@@ -163,9 +161,9 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 40px; /* Adjust height as needed */
+  height: 40px;
   width: 1px;
-  background-color: #e0e0e0; /* Light gray color */
+  background-color: #e0e0e0; 
 }
 
 .filter-group label {

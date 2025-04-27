@@ -1,12 +1,13 @@
 import React from 'react'
 import Hero from '../../Components/Hero/Hero'
-import Group from '../../Components/Group/Group'
+import Template from '../../Components/Template/Template'
 
 const Homepage = () => {
   return (
     <div>
       <Hero/>
-      {/* <Group/> */}
+      <Template /> 
+    
     </div>
   )
 }
