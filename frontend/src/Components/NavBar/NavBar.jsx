@@ -1,6 +1,8 @@
 import React from 'react';
 import './NavBar.css';
 import logo from '../../assets/logo.png';
+import logo1 from '../../assets/logo1.png'
+import logo2 from '../../assets/logo2.png'
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { FaSearch } from 'react-icons/fa';

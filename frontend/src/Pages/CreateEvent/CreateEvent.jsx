@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./CreateEvent.css"; 
 import api from '../../api/config';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ const CreateEvent = () => {
 
   const [token] = useState(localStorage.getItem("authToken") || "");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +57,7 @@ const CreateEvent = () => {
         },
       });
       toast.success("Event created successfully!");
+      // navigate("/");
       console.log(response.data);
     } catch (error) {
       console.error("Error creating event:", error.response?.data || error.message);

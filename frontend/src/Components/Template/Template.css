@@ -29,7 +29,7 @@
 
 .template-design {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     width: 100%;
     max-width: 95%; 
@@ -120,7 +120,7 @@
   }
   
   .buy-ticket-btn {
-    background: #4a6bff; 
+    background: #2C9CF0; 
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -131,6 +131,6 @@
   }
   
   .buy-ticket-btn:hover {
-    background: #3a5bef; 
+    background: #1b7dc4; 
   }
   
