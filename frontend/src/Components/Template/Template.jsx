@@ -2,12 +2,13 @@ import React,{useEffect,useState} from 'react'
 import api from '../../api/config';
 import './Template.css'
 import { GoHeart } from "react-icons/go"; 
-import { useNavigate } from 'react-router-dom';
+import { href, useNavigate } from 'react-router-dom';
 
 
 const Template = ({eventList:searchResults=[]}) => {
    const navigate = useNavigate();
    const [eventList,setEventList] = useState([]);
+   const [day , setDay] = useState(" ")
   
   
    useEffect(() => {
@@ -53,8 +54,14 @@ const Template = ({eventList:searchResults=[]}) => {
 
     return (
        <div className="template-container">
-      <h2>{searchResults.length > 0 ? "Search Results" : "Events"}</h2>
+      {/* <h2>{searchResults.length > 0 ? "Search Results" : "Events"}</h2> */}
           {/* <hr /> */}
+          <ul className="filter-tabs">
+  <li onClick={() => {setDay('Today')}}>Today { day ==="Today"?<hr/>: <></>}</li>
+  <li onClick={() => {setDay('Tomorrow')}}>Tomorrow { day ==="Tomorrow"?<hr/>: <></>}</li>
+  <li onClick={() => {setDay('This Week')}}>This Week { day ==="This Week"?<hr/>: <></>}</li>
+</ul>
+
         <div className='template-design'>
           
           {eventList.map((events,index) =>{
@@ -65,6 +72,8 @@ const Template = ({eventList:searchResults=[]}) => {
               }
             })
           }
+
+          
              key={index}>
               <div className="favorite-btn-container">
               <button className="favorite-btn" onClick={() => handleFavorite(events.id)}>
