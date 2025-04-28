@@ -120,9 +120,9 @@
   }
   
   .buy-ticket-btn {
-    background: #2C9CF0; 
-    color: #fff;
-    border: none;
+    background: white; 
+    color: #2C9CF0;
+    border: 1px solid  #2C9CF0;
     padding: 8px 16px;
     border-radius: 15px;
     cursor: pointer;
@@ -131,6 +131,7 @@
   }
   
   .buy-ticket-btn:hover {
-    background: #1b7dc4; 
+    border: 1px solid #1b7dc4; 
+    color: #1b7dc4;
   }
   

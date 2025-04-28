@@ -99,7 +99,7 @@
     border-radius:95px;
     color:#fff;
     font-size:20px;
-    background-color: #4a6bff ;
+    background-color: #2C9CF0 ;
     cursor: pointer;
   }
   .login-signup button a{
@@ -108,7 +108,7 @@
   }
   
   .login-signup button:hover {
-    background-color:  #3a5bef; 
+    background-color:  #1b7dc4; 
     font-size: 19px; 
   }
   
