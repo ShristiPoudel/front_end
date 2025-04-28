@@ -2,7 +2,8 @@ import React,{useEffect,useState} from 'react'
 import api from '../../api/config';
 import './Template.css'
 import { GoHeart } from "react-icons/go"; 
-import { href, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import fixed from '../../assets/fixed.png'
 
 
 const Template = ({eventList:searchResults=[]}) => {
@@ -56,6 +57,8 @@ const Template = ({eventList:searchResults=[]}) => {
        <div className="template-container">
       {/* <h2>{searchResults.length > 0 ? "Search Results" : "Events"}</h2> */}
           {/* <hr /> */}
+
+         
           <ul className="filter-tabs">
   <li onClick={() => {setDay('Today')}}>Today { day ==="Today"?<hr/>: <></>}</li>
   <li onClick={() => {setDay('Tomorrow')}}>Tomorrow { day ==="Tomorrow"?<hr/>: <></>}</li>
@@ -105,6 +108,10 @@ const Template = ({eventList:searchResults=[]}) => {
             </div>
           })}
         </div>
+
+        <div className="fixed">
+             <img src={fixed} alt="fixedImage" className='fixed-image' />
+            </div>
         </div>
       )
 }

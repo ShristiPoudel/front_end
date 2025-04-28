@@ -7,6 +7,8 @@
      min-height: 2000px; 
     padding: 0; 
     margin-bottom: 40px;
+    position: relative;
+    
 }
 
 /* .template-container h2 {
@@ -165,4 +167,16 @@
     border: 1px solid #1b7dc4; 
     color: #1b7dc4;
   }
+  
+.fixed{
+  position: absolute;
+  top: 53.5%;
+  left: 2.5%;
+}
+
+.fixed-image {
+  border-radius: 8px;
+  height: 493px;
+  width: 670px;
+}
   
