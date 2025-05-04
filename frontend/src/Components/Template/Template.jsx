@@ -9,7 +9,7 @@ import fixed from '../../assets/fixed.png'
 const Template = ({eventList:searchResults=[]}) => {
    const navigate = useNavigate();
    const [eventList,setEventList] = useState([]);
-   const [day , setDay] = useState(" ")
+   const [day , setDay] = useState("All")
   
   
    useEffect(() => {
@@ -60,9 +60,12 @@ const Template = ({eventList:searchResults=[]}) => {
 
          
           <ul className="filter-tabs">
+   <li onClick={() => {setDay('All')}}>All { day ==="All"?<hr/>: <></>}</li>
   <li onClick={() => {setDay('Today')}}>Today { day ==="Today"?<hr/>: <></>}</li>
   <li onClick={() => {setDay('Tomorrow')}}>Tomorrow { day ==="Tomorrow"?<hr/>: <></>}</li>
   <li onClick={() => {setDay('This Week')}}>This Week { day ==="This Week"?<hr/>: <></>}</li>
+  
+
 </ul>
 
         <div className='template-design'>

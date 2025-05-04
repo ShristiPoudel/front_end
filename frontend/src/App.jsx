@@ -19,6 +19,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Explore from './Pages/Explore/Explore';
 
 const App = () => {
   const { user, isLoggedIn, loading } = useAuth();
@@ -36,6 +37,7 @@ const App = () => {
             {/* Public Routes */}
             <Route path="/" element={<Homepage />} />
             <Route path="/events" element={<Events />} />
+            <Route path='/explore' element={<Explore/>} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/aboutus" element={<AboutUs />} />
 
