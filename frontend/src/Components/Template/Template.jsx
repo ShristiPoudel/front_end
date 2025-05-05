@@ -6,6 +6,7 @@ import {  useNavigate } from 'react-router-dom';
 import fixed from '../../assets/fixed.png'
 
 
+
 const Template = ({eventList:searchResults=[]}) => {
    const navigate = useNavigate();
    const [eventList,setEventList] = useState([]);
@@ -68,54 +69,82 @@ const Template = ({eventList:searchResults=[]}) => {
 
 </ul>
 
-        <div className='template-design'>
-          
-          {eventList.map((events,index) =>{
-            return <div 
-            onClick={() => navigate("/explore",{
-              state:{
-                events,
+ <div className="template-design">
+        {eventList.flatMap((events, index) => {
+          const card = (
+            <div
+              key={`card-${index}`}
+              onClick={() =>
+                navigate('/explore', {
+                  state: { events },
+                })
               }
-            })
+            >
+              <div className="favorite-btn-container">
+                <button
+                  className="favorite-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFavorite(events.id);
+                  }}
+                >
+                  <GoHeart />
+                </button>
+              </div>
+              <img src={events.image} alt={`image ${index}`} />
+              <p>{events.title}</p>
+              <div className="event-category">
+                {events.category.map((cat, catIndex) => (
+                  <div key={catIndex} className="categories-container">
+                    Category: {cat.name}
+                  </div>
+                ))}
+              </div>
+              <div className="time-date">
+                <div className="event-date">Date: {events.event_dates}</div>
+                <div className="event-time">Time: {events.time_start}</div>
+              </div>
+              <div className="interest-count">
+                Interested: {events.interest_count}
+              </div>
+              <div className="buy-ticket-btn-container">
+                <button
+                  className="buy-ticket-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBuyTicket(events.id);
+                  }}
+                >
+                  Buy Ticket
+                </button>
+              </div>
+            </div>
+          );
+
+          // Inject 2 hidden spacers after 8 items (2 full rows of 4 columns)
+          if (index === 8) {
+            return [
+              <div key="spacer-1" className="grid-spacer"></div>,
+              <div key="spacer-2" className="grid-spacer"></div>,
+              card,
+            ];
           }
 
+          return [card];
+        })}
+      </div>
           
-             key={index}>
-              <div className="favorite-btn-container">
-              <button className="favorite-btn" onClick={() => handleFavorite(events.id)}>
-                <GoHeart/> 
-              </button>
-            </div>
-             <img src={events.image} alt={`image ${index}`} />
-             <p>{events.title}</p>
-             <div className='event-category'>{events.category.map((cat,catIndex)=>{
-               return <div key={catIndex} className='categories-container'>
-                Category:{cat.name} 
-                </div>
-            
-          })}
-          </div>
-          <div className="time-date">
-          <div className="event-date">Date:{events.event_dates}</div>
-          <div className="event-time">Time:{events.time_start}</div>
-          </div>
-            <div className="interest-count">Interested:{events.interest_count}</div>
-            
-            <div className="buy-ticket-btn-container">
-              <button className="buy-ticket-btn" onClick={() => handleBuyTicket(events.id)}>
-                Buy Ticket
-              </button>
-            </div>
-
-    
-            </div>
-          })}
-        </div>
+          
 
         <div className="fixed">
              <img src={fixed} alt="fixedImage" className='fixed-image' />
             </div>
         </div>
+
+
+
+
+
       )
 }
 

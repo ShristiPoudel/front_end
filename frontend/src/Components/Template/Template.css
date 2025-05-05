@@ -167,6 +167,12 @@
     border: 1px solid #1b7dc4; 
     color: #1b7dc4;
   }
+
+  .grid-spacer {
+    visibility: hidden;
+    height: 0;
+  }
+  
   
 .fixed{
   position: absolute;
@@ -176,7 +182,7 @@
 
 .fixed-image {
   border-radius: 8px;
-  height: 493px;
+  height: 475px;
   width: 670px;
 }
   
