@@ -110,10 +110,17 @@
     font-size: 14px;
 }
 
-.interest-count {
+.price{
     margin: 10px;
     color: #8c8c8c;
     font-size: 14px;
+    display: flex;
+    
+}
+
+.rs {
+  margin-left: 10px;
+  color: black;
 }
 
 .favorite-btn-container {
