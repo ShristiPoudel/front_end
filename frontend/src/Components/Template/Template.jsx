@@ -139,6 +139,11 @@ const Template = ({eventList:searchResults=[]}) => {
         <div className="fixed">
              <img src={fixed} alt="fixedImage" className='fixed-image' />
             </div>
+
+
+            <div className='load-more-events'>
+              <button className='load-more-events-btn'>LOAD MORE EVENTS</button>
+            </div>
         </div>
 
 
