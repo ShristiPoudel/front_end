@@ -177,13 +177,13 @@
   
 .fixed{
   position: absolute;
-   top: 51.2%;
+   top: 1100px;
   left: 2.5%; 
 }
 
 .fixed-image {
   border-radius: 8px;
-  height: 470px;
+  height: 479px;
   width: 670px;
 }
   

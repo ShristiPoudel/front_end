@@ -11,6 +11,12 @@ const Template = ({eventList:searchResults=[]}) => {
    const navigate = useNavigate();
    const [eventList,setEventList] = useState([]);
    const [day , setDay] = useState("All")
+
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 14;
+
   
   
    useEffect(() => {
@@ -53,6 +59,14 @@ const Template = ({eventList:searchResults=[]}) => {
       console.log('Buy ticket for:', eventId);
     };
   
+    const totalPages = Math.ceil(eventList.length / eventsPerPage);
+  const visibleEvents = eventList.slice(0, currentPage * eventsPerPage);
+
+  const handleLoadMore = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
 
     return (
        <div className="template-container">
@@ -70,7 +84,7 @@ const Template = ({eventList:searchResults=[]}) => {
 </ul>
 
  <div className="template-design">
-        {eventList.flatMap((events, index) => {
+        {visibleEvents.flatMap((events, index) => {
           const card = (
             <div
               key={`card-${index}`}
@@ -140,10 +154,31 @@ const Template = ({eventList:searchResults=[]}) => {
              <img src={fixed} alt="fixedImage" className='fixed-image' />
             </div>
 
+         {/* Pagination Control */}
+         <div className='load-more-events'>
+             {currentPage < totalPages && (
+             <button
+             className='load-more-events-btn'
+               onClick={handleLoadMore}
+               >
+             LOAD MORE EVENTS
+             </button>
+            )}
 
-            <div className='load-more-events'>
-              <button className='load-more-events-btn'>LOAD MORE EVENTS</button>
-            </div>
+         {currentPage > 1 && (
+         <button
+         className='load-more-events-btn'
+           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+             >
+           SHOW LESS EVENTS
+         </button>
+  )}
+</div>
+
+
+
+
+
         </div>
 
 

@@ -81,11 +81,11 @@
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 18px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
     height: 40px;
-    width: 110px;
+    width: 120px;
     transition: background 0.3s ease;
   }
   
