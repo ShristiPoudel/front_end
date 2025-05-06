@@ -1,10 +1,10 @@
 import React from 'react';
-import './LimitedTimeOffer.css'; // You'll style this separately
+import './LimitedTimeOffer.css'; 
 
 const LimitedTimeOffer = ({ eventList, handleBuyTicket }) => {
   const limitedEvent = eventList.find(event => event.id === 17);
 
-  if (!limitedEvent) return null; // Fallback if not found
+  if (!limitedEvent) return null; 
 
   return (
     <section className="limited-offer-section">
@@ -24,7 +24,7 @@ const LimitedTimeOffer = ({ eventList, handleBuyTicket }) => {
           <p>{limitedEvent.description}</p>
 
           <button
-            className="buy-ticket-btn"
+            className="limited-btn"
             onClick={() => handleBuyTicket(limitedEvent.id)}
           >
             Buy Ticket
