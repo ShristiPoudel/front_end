@@ -119,9 +119,9 @@ const Template = ({eventList:searchResults=[]}) => {
                 <div className="event-time">Time: {events.time_start}</div>
               </div>
               <div className="price">
-                Start from
+                Start from:
                 <div className='rs'>
-                Rs {events.common_price}
+                NPR {events.common_price}
                   </div> 
               </div>
               <div className="buy-ticket-btn-container">
