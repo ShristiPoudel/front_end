@@ -20,6 +20,7 @@ import { useAuth } from './context/AuthContext';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Explore from './Pages/Explore/Explore';
+import BuyTicket from './Pages/BuyTicket/BuyTicket';
 
 const App = () => {
   const { user, isLoggedIn, loading } = useAuth();
@@ -40,6 +41,7 @@ const App = () => {
             <Route path='/explore' element={<Explore/>} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path='/buy-ticket' element={<BuyTicket/>}/>
 
             {/* Auth-only (common) */}
             <Route element={<ProtectedRoute />}>

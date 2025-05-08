@@ -4,13 +4,20 @@ import './Template.css'
 import { GoHeart } from "react-icons/go"; 
 import {  useNavigate } from 'react-router-dom';
 import fixed from '../../assets/fixed.png'
+import BuyTicket from '../../Pages/BuyTicket/BuyTicket';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 
 const Template = ({eventList:searchResults=[]}) => {
    const navigate = useNavigate();
    const [eventList,setEventList] = useState([]);
-   const [day , setDay] = useState("All")
+   const [day , setDay] = useState("All");
+   const [showModal, setShowModal] = useState(false);
+   const [selectedEvent, setSelectedEvent] = useState(null);
+
 
 
   // Pagination state
@@ -56,8 +63,54 @@ const Template = ({eventList:searchResults=[]}) => {
     };
   
     const handleBuyTicket = (eventId) => {
-      console.log('Buy ticket for:', eventId);
+      const token = localStorage.getItem('authToken');
+    
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+    
+      const event = eventList.find(e => e.id === eventId);
+      setSelectedEvent(event);
+      setShowModal(true);
     };
+    
+
+    const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
+      const token = localStorage.getItem('authToken');
+    
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+    
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`,
+        };
+    
+        const response = await axios.post(
+          `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
+          {
+            ticket_type: ticketType,
+            quantity: quantity,
+          },
+          { headers }
+        );
+    
+        console.log('Khalti Initiated:', response.data);
+    
+        if (response.data.payment_url) {
+          window.location.href = response.data.payment_url;
+        }
+      } catch (error) {
+        console.error('Error initiating payment:', error);
+        alert('Failed to initiate payment. Please try again.');
+      }
+    };
+    
+    
   
     const totalPages = Math.ceil(eventList.length / eventsPerPage);
   const visibleEvents = eventList.slice(0, currentPage * eventsPerPage);
@@ -175,14 +228,25 @@ const Template = ({eventList:searchResults=[]}) => {
              >
            SHOW LESS EVENTS
          </button>
+         
   )}
-</div>
+          </div>
 
 
-
+          {showModal && selectedEvent && (
+  <BuyTicket
+    event={selectedEvent}
+    onClose={() => setShowModal(false)}
+    onConfirm={handleConfirmPurchase}
+  />
+)}
 
 
         </div>
+
+
+
+
 
 
 
