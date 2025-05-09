@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
     title: "",
-    category: [],
+    category: "",
     event_dates: "",
     time_start: "",
     venue_name: "",
@@ -24,14 +24,15 @@ const CreateEvent = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+ 
+  
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "category") {
-      setFormData({ ...formData, category: Array.from(e.target.selectedOptions, option => option.value) });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
+  
 
   const handleFileChange = (e) => {
     setFormData({ ...formData, image: e.target.files[0] });
@@ -43,11 +44,16 @@ const CreateEvent = () => {
     
     Object.keys(formData).forEach(key => {
       if (key === "category") {
-        formData[key].forEach(category => data.append("category", category));
+        formData[key]
+          .split(",")
+          .map(c => c.trim())
+          .filter(c => c)
+          .forEach(category => data.append("category", category));
       } else {
         data.append(key, formData[key]);
       }
     });
+    
 
     try {
       const response = await api.post("/events/", data, {
@@ -88,21 +94,18 @@ const CreateEvent = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="category">Event Category:</label>
-            <select 
-              id="category"
-              name="category" 
-              multiple
-              value={formData.category} 
-              onChange={handleChange}
-              className="category-select"
-            >
-              <option value="Music">Music</option>
-              <option value="Tech">Tech</option>
-              <option value="Sports">Sports</option>
-            </select>
-            <small>(Hold CTRL to select multiple)</small>
-          </div>
+          <label htmlFor="category">Event Categories:</label>
+        <input
+           type="text"
+          id="category"
+         name="category"
+         placeholder="e.g. Music, Tech, Sports"
+         value={formData.category}
+          onChange={handleChange}
+        />
+         <small>Separate multiple categories with commas.</small>
+       </div>
+
 
           <div className="form-group">
             <label htmlFor="event_dates">Event Date:</label>

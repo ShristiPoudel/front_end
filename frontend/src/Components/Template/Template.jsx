@@ -161,12 +161,9 @@ const Template = ({eventList:searchResults=[]}) => {
               <img src={events.image} alt={`image ${index}`} />
               <p>{events.title}</p>
               <div className="event-category">
-                {events.category.map((cat, catIndex) => (
-                  <div key={catIndex} className="categories-container">
-                    Category: {cat.name}
-                  </div>
-                ))}
-              </div>
+               Category: {events.category.map(cat => cat.name).join(', ')}
+                    </div>
+
               <div className="time-date">
                 <div className="event-date">Date: {events.event_dates}</div>
                 <div className="event-time">Time: {events.time_start}</div>
