@@ -1,191 +1,57 @@
+
 .template-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    /* height: 90vh; */
-     min-height: 2000px; 
-    padding: 0; 
-    margin-bottom: 40px;
-    position: relative;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 2000px;
+  padding: 0;
+  margin-bottom: 40px;
+  position: relative;
 }
-
-/* .template-container h2 {
-    padding: 7px;
-    margin-top: 15px;
-    color: #171717;
-    font-size: 35px;
-    font-weight: 600;
-    display: inline-block;
-} */
-
-/* .template-container hr {
-    width: 119px;
-    height: 4px;
-    border-radius: 10px;
-    background-color: #252525;
-    margin-left: 10px;
-
-} */
 
 .filter-tabs {
-    display: flex;
-    gap: 75px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    list-style: none;
-  }
+  display: flex;
+  gap: 75px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  list-style: none;
+}
 
-  .filter-tabs li:hover {
-    color: #1b7dc4;
-  }
+.filter-tabs li:hover {
+  color: #1b7dc4;
+}
 
-
-  .filter-tabs hr{
-    border: none; 
-    width: 100%;
-    height: 2px; 
-    border-radius: 10px;
-    background: #1b7dc4;
-  }
-
-  
+.filter-tabs hr {
+  border: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 10px;
+  background: #1b7dc4;
+}
 
 .template-design {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
-    max-width: 95%; 
-    margin: 10px; 
-    padding: 0; 
-    cursor: pointer;
-    margin-bottom: 45px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 95%;
+  margin: 10px;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 45px;
 }
 
-.template-design > div {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+
+.grid-spacer {
+  visibility: hidden;
+  height: 0;
 }
 
-.template-design > div:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.template-design img {
-    height: 300px;
-    width: 100%;
-    max-width: 92%;
-    object-fit: cover;
-    border-radius: 12px;
-    margin: 14px;
-}
-
-.template-design p {
-    margin: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #171717;
-}
-
-.event-category {
-    margin: 10px;
-    color: #8c8c8c;
-    font-size: 14px;
-}
-
-.time-date {
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    color: #8c8c8c;
-    font-size: 14px;
-}
-
-.price{
-    margin: 10px;
-    color: #8c8c8c;
-    font-size: 14px;
-    display: flex;
-    
-}
-
-.rs {
-  margin-left: 10px;
-  color: black;
-}
-
-.favorite-btn-container {
-    position: absolute;
-    top: 24px;
-    right: 20px;
-    z-index: 1; 
-    
-  }
-
-  
-  .favorite-btn {
-    background: rgba(255, 255, 255, 0.8); 
-    border: none;
-    border-radius: 50%; 
-    width: 34px; 
-    height: 34px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.3s ease; 
-    padding: 0; 
-}
-
-.favorite-btn:hover {
-    color: #ff4757;
-    background: rgba(255, 255, 255, 0.9); 
-}
-  
-  
-  .buy-ticket-btn-container {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1; 
-  }
-  
-  .buy-ticket-btn {
-    background: white; 
-    color: #2C9CF0;
-    border: 1px solid  #2C9CF0;
-    padding: 8px 16px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s ease;
-  }
-  
-  .buy-ticket-btn:hover {
-    border: 1px solid #1b7dc4; 
-    color: #1b7dc4;
-  }
-
-  .grid-spacer {
-    visibility: hidden;
-    height: 0;
-  }
-  
-  
-.fixed{
+.fixed {
   position: absolute;
-   top: 1074px;
-  left: 2.5%; 
+  top: 1074px;
+  left: 2.5%;
 }
 
 .fixed-image {
@@ -193,7 +59,6 @@
   height: 479px;
   width: 670px;
 }
-  
 
 .load-more-events {
   display: flex;
@@ -208,13 +73,13 @@
   content: "";
   flex: 1;
   height: 1px;
-  background-color: #a4a1a1; 
-  margin: 0 12px; 
+  background-color: #a4a1a1;
+  margin: 0 12px;
 }
 
 .load-more-events-btn {
-  background-color: #5d5b5b; 
-  color: #fff; 
+  background-color: #5d5b5b;
+  color: #fff;
   border: none;
   border-radius: 50px;
   padding: 10px 30px;
@@ -224,5 +89,5 @@
 }
 
 .load-more-events-btn:hover {
-  background-color: #878585; /* Slightly darker on hover */
+  background-color: #878585; 
 }

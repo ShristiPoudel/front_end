@@ -63,7 +63,7 @@ const CreateEvent = () => {
         },
       });
       toast.success("Event created successfully!");
-      // navigate("/");
+       navigate("/")
       console.log(response.data);
     } catch (error) {
       console.error("Error creating event:", error.response?.data || error.message);

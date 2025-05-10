@@ -32,7 +32,7 @@ const NavBar = () => {
         {isLoggedIn && userRole === 'attendee' && (
           <>
           
-          <li><Link to="/attendee-dashboard/book-event">My Tickets</Link></li>
+          <li><Link to="/attendee-dashboard/book-event">My Ticket</Link></li>
           </>
         )}
         

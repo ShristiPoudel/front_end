@@ -1,194 +1,122 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import api from '../../api/config';
-import './Template.css'
-import { GoHeart } from "react-icons/go"; 
-import {  useNavigate } from 'react-router-dom';
-import fixed from '../../assets/fixed.png'
+import './Template.css';
+import fixed from '../../assets/fixed.png';
 import BuyTicket from '../../Pages/BuyTicket/BuyTicket';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import { GoHeart } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
+import EventCard from '../EventCard/EventCard';
 
-
-
-const Template = ({eventList:searchResults=[]}) => {
-   const navigate = useNavigate();
-   const [eventList,setEventList] = useState([]);
-   const [day , setDay] = useState("All");
-   const [showModal, setShowModal] = useState(false);
-   const [selectedEvent, setSelectedEvent] = useState(null);
-
-
-
-  // Pagination state
+const Template = ({ eventList: searchResults = [] }) => {
+  const navigate = useNavigate();
+  const [eventList, setEventList] = useState([]);
+  const [day, setDay] = useState("All");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 14;
 
-  
-  
-   useEffect(() => {
+  useEffect(() => {
     if (searchResults.length > 0) {
       setEventList(searchResults);
       return;
     }
-  
+
     async function fetchEvents() {
       try {
-        const token = localStorage.getItem('authToken'); 
-  
-        const headers = token
-          ? { Authorization: `Token ${token}` } 
-          : {}; 
-  
+        const token = localStorage.getItem('authToken');
+        const headers = token ? { Authorization: `Token ${token}` } : {};
         const response = await api.get('/events/public-events/', { headers });
-  
-        console.log("Events:", response.data);
         setEventList(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
-
         if (error.response && error.response.status === 401) {
-          console.warn("Unauthorized access. Showing public events only.");
-          setEventList([]); 
+          setEventList([]);
         }
       }
     }
-  
+
     fetchEvents();
   }, []);
-  
 
-    const handleFavorite = (eventId) => {
-      console.log('Added to favorites:', eventId);
-    };
-  
-    const handleBuyTicket = (eventId) => {
-      const token = localStorage.getItem('authToken');
-    
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-    
-      const event = eventList.find(e => e.id === eventId);
-      setSelectedEvent(event);
-      setShowModal(true);
-    };
-    
+  const handleFavorite = (eventId) => {
+    console.log('Added to favorites:', eventId);
+  };
 
-    const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
-      const token = localStorage.getItem('authToken');
-    
-      if (!token) {
-        navigate('/login');
-        return;
+  const handleBuyTicket = (eventId) => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    const event = eventList.find(e => e.id === eventId);
+    setSelectedEvent(event);
+    setShowModal(true);
+  };
+
+  const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      };
+
+      const response = await axios.post(
+        `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
+        { ticket_type: ticketType, quantity },
+        { headers }
+      );
+
+      if (response.data.payment_url) {
+        window.location.href = response.data.payment_url;
       }
-    
-      try {
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${token}`,
-        };
-    
-        const response = await axios.post(
-          `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
-          {
-            ticket_type: ticketType,
-            quantity: quantity,
-          },
-          { headers }
-        );
-    
-        console.log('Khalti Initiated:', response.data);
-    
-        if (response.data.payment_url) {
-          window.location.href = response.data.payment_url;
-        }
-      } catch (error) {
-        console.error('Error initiating payment:', error);
-        alert('Failed to initiate payment. Please try again.');
-      }
-    };
-    
-    
-  
-    const totalPages = Math.ceil(eventList.length / eventsPerPage);
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      toast.success('Failed to initiate payment. Please try again.');
+    }
+  };
+
+  const totalPages = Math.ceil(eventList.length / eventsPerPage);
   const visibleEvents = eventList.slice(0, currentPage * eventsPerPage);
 
   const handleLoadMore = () => {
     if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+      setCurrentPage(prev => prev + 1);
     }
   };
 
-    return (
-       <div className="template-container">
-      {/* <h2>{searchResults.length > 0 ? "Search Results" : "Events"}</h2> */}
-          {/* <hr /> */}
+  return (
+    <div className="template-container">
+      <ul className="filter-tabs">
+        <li onClick={() => setDay('All')}>All {day === "All" && <hr />}</li>
+        <li onClick={() => setDay('Today')}>Today {day === "Today" && <hr />}</li>
+        <li onClick={() => setDay('Tomorrow')}>Tomorrow {day === "Tomorrow" && <hr />}</li>
+        <li onClick={() => setDay('This Week')}>This Week {day === "This Week" && <hr />}</li>
+      </ul>
 
-         
-          <ul className="filter-tabs">
-   <li onClick={() => {setDay('All')}}>All { day ==="All"?<hr/>: <></>}</li>
-  <li onClick={() => {setDay('Today')}}>Today { day ==="Today"?<hr/>: <></>}</li>
-  <li onClick={() => {setDay('Tomorrow')}}>Tomorrow { day ==="Tomorrow"?<hr/>: <></>}</li>
-  <li onClick={() => {setDay('This Week')}}>This Week { day ==="This Week"?<hr/>: <></>}</li>
-  
-
-</ul>
-
- <div className="template-design">
-        {visibleEvents.flatMap((events, index) => {
+      <div className="template-design">
+        {visibleEvents.flatMap((event, index) => {
           const card = (
-            <div
+            <EventCard
               key={`card-${index}`}
-              onClick={() =>
-                navigate('/explore', {
-                  state: { events },
-                })
+              event={event}
+              onClick={(e) =>
+                navigate('/explore', { state: { events: event } })
               }
-            >
-              <div className="favorite-btn-container">
-                <button
-                  className="favorite-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleFavorite(events.id);
-                  }}
-                >
-                  <GoHeart />
-                </button>
-              </div>
-              <img src={events.image} alt={`image ${index}`} />
-              <p>{events.title}</p>
-              <div className="event-category">
-               Category: {events.category.map(cat => cat.name).join(', ')}
-                    </div>
-
-              <div className="time-date">
-                <div className="event-date">Date: {events.event_dates}</div>
-                <div className="event-time">Time: {events.time_start}</div>
-              </div>
-              <div className="price">
-                Start from:
-                <div className='rs'>
-                NPR {events.common_price}
-                  </div> 
-              </div>
-              <div className="buy-ticket-btn-container">
-                <button
-                  className="buy-ticket-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleBuyTicket(events.id);
-                  }}
-                >
-                  Buy Ticket
-                </button>
-              </div>
-            </div>
+              onFavorite={handleFavorite}
+              onBuyTicket={handleBuyTicket}
+            />
           );
 
-          // Inject 2 hidden spacers after 8 items (2 full rows of 4 columns)
           if (index === 8) {
             return [
               <div key="spacer-1" className="grid-spacer"></div>,
@@ -200,56 +128,37 @@ const Template = ({eventList:searchResults=[]}) => {
           return [card];
         })}
       </div>
-          
-          
 
-        <div className="fixed">
-             <img src={fixed} alt="fixedImage" className='fixed-image' />
-            </div>
+      <div className="fixed">
+        <img src={fixed} alt="fixedImage" className='fixed-image' />
+      </div>
 
-         {/* Pagination Control */}
-         <div className='load-more-events'>
-             {currentPage < totalPages && (
-             <button
-             className='load-more-events-btn'
-               onClick={handleLoadMore}
-               >
-             LOAD MORE EVENTS
-             </button>
-            )}
-
-         {currentPage > 1 && (
-         <button
-         className='load-more-events-btn'
-           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-             >
-           SHOW LESS EVENTS
-         </button>
-         
+      <div className='load-more-events'>
+  {currentPage * eventsPerPage < eventList.length ? (
+    <button className='load-more-events-btn' onClick={handleLoadMore}>
+      LOAD MORE EVENTS
+    </button>
+  ) : (
+    <button
+      className='load-more-events-btn'
+      onClick={() => setCurrentPage(1)}
+      disabled={eventList.length <= eventsPerPage}
+    >
+      SHOW LESS EVENTS
+    </button>
   )}
-          </div>
+</div>
 
 
-          {showModal && selectedEvent && (
-  <BuyTicket
-    event={selectedEvent}
-    onClose={() => setShowModal(false)}
-    onConfirm={handleConfirmPurchase}
-  />
-)}
+      {showModal && selectedEvent && (
+        <BuyTicket
+          event={selectedEvent}
+          onClose={() => setShowModal(false)}
+          onConfirm={handleConfirmPurchase}
+        />
+      )}
+    </div>
+  );
+};
 
-
-        </div>
-
-
-
-
-
-
-
-
-
-      )
-}
-
-export default Template
+export default Template;
