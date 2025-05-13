@@ -14,6 +14,8 @@ import { useAuth } from '../../context/AuthContext';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 
 const Explore = () => {
@@ -24,6 +26,8 @@ const Explore = () => {
   const { user } = useAuth();
   const[event,setEvent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
   
   useEffect(() => {
     if (!event && id) {
@@ -44,7 +48,38 @@ const Explore = () => {
     console.log('Buy ticket for:', eventId);
   };
 
- 
+  const handleDelete = async (eventId) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      console.log("Attempting to delete event:", {
+        eventId,
+        endpoint: `/events/${eventId}/`,
+        tokenPresent: !!token
+      });
+  
+      const response = await api.delete(`/events/${eventId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+  
+      console.log("Delete response:", response);
+      toast.success("Event deleted successfully");
+      navigate("/");
+      
+    } catch (err) {
+      console.error("Full delete error:", {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status,
+        config: err.config
+      });
+      
+      toast.error(err.response?.data?.message || "Failed to delete event");
+    }
+  };
+  
 
   return (
     <div className="explore">
@@ -148,7 +183,8 @@ const Explore = () => {
           </button>
           <button
             className="dropdown-item"
-            onClick={() => console.log('Delete event', event.id)}
+            onClick={() => setShowConfirm(true)}
+
           >
             <FaTrash className="dropdown-icon" />
             Delete
@@ -238,6 +274,20 @@ const Explore = () => {
           </button>
         </form>
       </div>
+
+
+      {showConfirm && (
+  <div className="confirm-modal">
+    <div className="confirm-box">
+      <p>Are you sure you want to delete this event?</p>
+      <div className="confirm-buttons">
+        <button onClick={() => handleDelete(event.id)} className="confirm-yes">Yes, Delete</button>
+        <button onClick={() => setShowConfirm(false)} className="confirm-no">Cancel</button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
