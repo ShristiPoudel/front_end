@@ -2,7 +2,14 @@ import React ,{useState,useEffect}from 'react';
 import { GoHeart } from 'react-icons/go';
 import { useLocation } from 'react-router-dom';
 import './Explore.css';
-import api from '../../api/config'
+import api from '../../api/config';
+import locationMap from '../../assets/location.jpg'
+import { IoLocationOutline } from "react-icons/io5";
+import { LiaRupeeSignSolid } from "react-icons/lia";
+import { IoCalendarOutline } from "react-icons/io5";
+import { BiCategoryAlt } from "react-icons/bi";
+import { GoPeople } from "react-icons/go";
+import { IoSearchOutline } from "react-icons/io5";
 
 const Explore = () => {
   const location = useLocation();
@@ -47,12 +54,14 @@ const Explore = () => {
       {/* Banner Section */}
       <div className="explore-banner">
         <img src={event.image} alt={event.title} className="explore-banner-img" />
-        <div className="explore-banner-overlay">
+
+        <div className="explore-banner-details">
           <h1 className="explore-banner-title">{event.title}</h1>
           <p className="explore-banner-org">
             By <span className="explore-banner-org-name">{use?.name || "The World Organizers"}</span>
-          </p>
-        </div>
+           </p> 
+          </div>
+       
 
         <div className='explore-favorite-btn-container'>
         <button
@@ -65,51 +74,80 @@ const Explore = () => {
       </div>
 
       {/* Categories */}
-      <div className="explore-tags">
-        {event.category?.map((cat, index) => (
-          <span key={index} className="explore-tag">
-            {cat.name}
-          </span>
-        ))}
-      </div>
+      <div className="explore-tags-section">
+    <div className="explore-tags">
+      {event.category?.map((cat, index) => (
+        <span key={index} className="explore-tag">
+          {cat.name}
+        </span>
+      ))}
+    </div>
+  </div>
 
-      {/* Floating Info Bar */}
+
+ 
+
+      <div className="explore-map-wrapper">
+        {/* Floating Info Bar */}
       <div className="explore-info-bar">
-        <div className="info-item">
-          <strong>Date</strong>
-          <p>{event.event_dates}</p>
+      <div className="info-item">
+      <label>
+           <IoCalendarOutline className='item-icon' />
+           Date
+         </label>
+            <p>{event.event_dates}</p>
+          </div>
+          <div className="info-item">
+            <label>
+            <IoSearchOutline className="info-icon" />
+              Time
+              </label>
+            <p>{event.time_start}</p>
+          </div>
+          <div className="info-item">
+            <label>
+            <BiCategoryAlt className="info-icon" />
+              Type</label>
+            <p>
+              {Array.isArray(event.category) && event.category.length > 0
+                ? event.category.map(cat => cat.name).join(', ')
+                : 'N/A'}
+            </p>
+          </div>
+          <div className="info-item">
+            <label>
+            <IoLocationOutline className="info-icon" />
+              Location
+              </label>
+            <p>{event.venue_location}</p>
+          </div>
+          <div className="info-item price-box">
+            <label>
+            <LiaRupeeSignSolid className="info-icon" />
+              Price
+              </label>
+            <p>NPR {event.common_price}</p>
+          </div>
+          <div className="info-item">
+            <button className="explore-buy-ticket-btn" onClick={() => handleBuyTicket(event.id)}>
+              Buy Ticket
+            </button>
+          </div>
         </div>
-        <div className="info-item">
-          <strong>Time</strong>
-          <p>{event.time_start}</p>
-        </div>
-        <div className="info-item">
-  <strong>Type</strong>
-  <p>
-    {Array.isArray(event.category) && event.category.length > 0
-      ? event.category.map(cat => cat.name).join(', ')
-      : 'N/A'}
-  </p>
-</div>
 
-        <div className="info-item">
-          <strong>Location</strong>
-          <p>{event.venue_location}</p>
-        </div>
-        <div className="info-item price-box">
-          <strong>Price</strong>
-          <p>NPR {event.common_price}</p>
-        </div>
-        <div className="info-item">
-          <button className="buy-ticket-btn" onClick={() => handleBuyTicket(event.id)}>
-            Buy Ticket
-          </button>
-        </div>
-      </div>
 
       {/* Event Description */}
       <div className="explore-description">
         <p>{event.description}</p>
+      </div>
+
+      <div className="explore-map-section">
+        <img
+          alt="Venue Map"
+          src={locationMap}
+          className="explore-map-img"
+        />
+      </div>
       </div>
 
       {/* Guidelines Section */}
@@ -131,15 +169,15 @@ const Explore = () => {
       <div className="explore-section">
         <h3>Frequently Asked Questions</h3>
         <details>
-          <summary>What time does the Imagine Dragons concert in LA begin?</summary>
+          <summary>What time does the {event.title} in {event.venue_location} begin?</summary>
           <p>{event.time_start}</p>
         </details>
         <details>
-          <summary>Where is the Grand Arena located, and how do I get there?</summary>
+          <summary>Where is the {event.venue_name} located, and how do I get there?</summary>
           <p>{event.venue_location}</p>
         </details>
         <details>
-          <summary>Will there be any opening acts before Imagine Dragons take the stage?</summary>
+          <summary>Will there be any opening acts before {event.title} take the stage?</summary>
           <p>To be announced.</p>
         </details>
         <details>
@@ -150,9 +188,8 @@ const Explore = () => {
 
       {/* Ask Question */}
       <div className="explore-section">
-        <p>
-          Don’t see the answer you’re looking for?{' '}
-          <a href="#ask">Post Your Question</a>
+        <p className='postp'>
+          Don’t see the answer you’re looking for? Post Your Question
         </p>
         <form className="explore-question-form">
           <input

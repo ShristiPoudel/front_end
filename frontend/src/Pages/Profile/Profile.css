@@ -154,11 +154,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #aaa;
+  border: 2px solid #2C9CF0;
   background: transparent;
   cursor: pointer;
-   height: 150px;
-  width: 150px;
+   height: 130px;
+  width: 130px;
   margin-top: 150px;
   margin-left: 100px;
   border-radius: 50%; 
@@ -166,12 +166,18 @@
 }
 
 .create-event-button:hover {
-  border-color: #333;
+  border-color: #1b7dc4;
 }
 
 .plus-icon {
   margin-right: 0.5rem;
   font-size: 40px;
+  /* font-weight: 500px; */
+  color: #2C9CF0;
+}
+
+.plus-icon:hover {
+  color: #1b7dc4;
 }
 
 .loading-message {

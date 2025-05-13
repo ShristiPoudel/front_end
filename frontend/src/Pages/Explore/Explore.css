@@ -11,7 +11,7 @@
   position: relative;
   width: 100%;
   height: 420px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .explore-banner-img {
@@ -20,46 +20,54 @@
   object-fit: cover;
 }
 
-.explore-banner-overlay {
-  position: absolute;
-  bottom: 30px;
-  left: 40px;
-  color: #fff;
-  text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+.explore-banner-details {
+  padding: 10px 50px;
+  text-align: left;
 }
 
 .explore-banner-title {
-  font-size: 36px;
+  font-size: 32px;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 .explore-banner-org {
-  margin-top: 5px;
   font-size: 16px;
 }
 
 .explore-banner-org-name {
-  color: #78aaff;
+  color: #3a5bef;
   font-weight: 600;
 }
 
-/* Favorite button */
-.explore-favorite-btn {
+
+.explore-favorite-btn-container {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  background: white;
+  bottom: -20px;
+  right: 150px;
+  z-index: 3;
+}
+
+.explore-favorite-btn {
+  background: #3a5bef;
+  color: white;
   border: none;
   border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 1.4rem;
-  transition: transform 0.2s;
+  font-size: 20px;
+  transition: all 0.3s ease;
 }
 
 .explore-favorite-btn:hover {
-  transform: scale(1.1);
+  color: #ff4757;
+  background: rgba(255, 255, 255, 0.9);
 }
+
 
 /* Tag badges */
 .explore-tags {
@@ -67,79 +75,128 @@
   gap: 10px;
   padding: 20px 40px;
   flex-wrap: wrap;
+  padding-top: 100px;
 }
 
 .explore-tag {
-  background-color: #f1f1f1;
+  background-color: #e1dede;
   color: #333;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
+} 
+
+.explore-map-wrapper {
+  position: relative;
+  margin-right: 70px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -60px; 
+  z-index: 1;
 }
 
-/* Info Bar */
-.explore-info-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  border-radius: 12px;
-  margin: 0 auto;
-  margin-top: -30px;
-  padding: 20px 30px;
-  width: 90%;
-  max-width: 1100px;
+
+.explore-map-section {
   position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.explore-map-img {
+  width: 500px;
+  height: 260px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+.explore-info-bar {
+  position: absolute;
+  top: 90px; 
+  left: 45%;
+  transform: translateX(-50%);
+  width: 80%;
   z-index: 2;
-  transform: translateY(-50%);
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 20px 40px;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
 }
 
-.info-item {
+
+ .info-item {
   text-align: center;
   flex: 1 1 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+
+ .info-item label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #2C9CF0;
+    font-size: 15px;
+  }
+  
+
+.info-icon {
+  color: #666;
 }
 
-.price-box {
+ /* .price-box {
   background-color: #f0f6ff;
   border-radius: 10px;
-  padding: 10px;
-}
+  padding: 5px;
+}  */
 
-/* .buy-ticket-btn {
-  background-color: #1e90ff;
-  color: white;
-  padding: 12px 20px;
+.explore-buy-ticket-btn {
+  background: white;
+  background-color: #2C9CF0;
   border: none;
-  border-radius: 10px;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 15px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
-.buy-ticket-btn:hover {
-  background-color: #1577d3;
+.explore-buy-ticket-btn:hover {
+  /* border: 1px solid #1b7dc4; */
+  background-color: #1b7dc4;
   color: white;
-} */
+}
+
 
 /* Description */
 .explore-description {
   padding: 30px 40px;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
+  margin-top: 160px;
+  margin-left: auto;
+  margin-right: 0;
+  width: 60%; 
 }
+
 
 /* Section Heading */
 .explore-section {
   padding: 30px 40px;
   background: #fff;
-  margin: 20px 0;
-  border-top: 1px solid #e5e5e5;
 }
 
 .explore-section h3 {
+  color: #2C9CF0;
   margin-bottom: 15px;
 }
 
@@ -161,6 +218,9 @@ details p {
   font-size: 0.95rem;
 }
 
+.postp{
+  color: #2C9CF0;
+}
 /* Ask a question */
 .explore-question-form {
   display: flex;

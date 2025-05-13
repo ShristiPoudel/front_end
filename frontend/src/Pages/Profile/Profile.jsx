@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import EventCard from '../../Components/EventCard/EventCard';
 import { BsPlusLg } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
+import { FaPlus } from "react-icons/fa";
+
 
 
 
