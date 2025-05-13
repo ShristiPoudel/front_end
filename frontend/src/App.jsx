@@ -9,7 +9,6 @@ import Feedback from './Pages/FeedBack/FeedBack';
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import Profile from './Pages/Profile/Profile';
 import Footer from './Components/Footer/Footer';
-import ManageEvent from './Pages/ManageEvent/ManageEvent';
 import BookEvent from './Pages/BookEvent/BookEvent';
 import Logout from './Pages/Logout/Logout';
 import SignUp from './Pages/SignUp/SignUp';
@@ -21,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Explore from './Pages/Explore/Explore';
 import BuyTicket from './Pages/BuyTicket/BuyTicket';
+import EditEvent from './Pages/EditEvent/EditEvent';
 
 const App = () => {
   const { user, isLoggedIn, loading } = useAuth();
@@ -38,7 +38,7 @@ const App = () => {
             {/* Public Routes */}
             <Route path="/" element={<Homepage />} />
             <Route path="/events" element={<Events />} />
-            <Route path='/explore' element={<Explore/>} />
+            <Route path='/explore/:id' element={<Explore />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path='/buy-ticket' element={<BuyTicket/>}/>
@@ -52,8 +52,8 @@ const App = () => {
             {/* Organizer-Only Routes */}
             <Route element={<ProtectedRoute allowedRoles={['organizer']} />}>
               <Route path="/organizer-dashboard/create-events" element={<CreateEvent />} />
-              <Route path="/organizer-dashboard/manage-events" element={<ManageEvent />} />
-            </Route>
+              <Route path="/organizer-dashboard/edit-events" element={<EditEvent/>}/>
+              </Route>
 
             {/* Attendee-Only Routes */}
             <Route element={<ProtectedRoute allowedRoles={['attendee']} />}>

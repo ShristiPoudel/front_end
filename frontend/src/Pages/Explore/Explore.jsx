@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}from 'react';
+import React,{useState,useEffect} from 'react';
 import { GoHeart } from 'react-icons/go';
 import { useLocation } from 'react-router-dom';
 import './Explore.css';
@@ -10,16 +10,32 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { BiCategoryAlt } from "react-icons/bi";
 import { GoPeople } from "react-icons/go";
 import { IoSearchOutline } from "react-icons/io5";
+import { useAuth } from '../../context/AuthContext';
+import { IoMdArrowDropdown } from "react-icons/io";
+import { FaEdit, FaTrash } from 'react-icons/fa'; 
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 const Explore = () => {
+  const {id}= useParams();
   const location = useLocation();
-  const event = location.state?.events;
-  const [use, setUse] = useState(null);
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
+  const[event,setEvent] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  
+  useEffect(() => {
+    if (!event && id) {
+      api.get(`/events/public-events/${id}/`)
+        .then(response => setEvent(response.data))
+        .catch(error => console.error('Error fetching event:', error));
+    }
+  }, [event, id]);
 
   if (!event) {
-    return <p>No event details available.</p>;
+    return <p>Loading event details...</p>; // or spinner
   }
-
   const handleFavorite = (eventId) => {
     console.log('Added to favorites:', eventId);
   };
@@ -28,26 +44,7 @@ const Explore = () => {
     console.log('Buy ticket for:', eventId);
   };
 
-   useEffect(() => {
-     async function getRole() {
-       try {
-         const token = localStorage.getItem('authToken');
-      
-         const headers = {
-           Authorization: `Token ${token}`,
-         };
-
-         const roleResponse = await api.get('/user/profile/', { headers });
-         setUse(roleResponse.data);
-
-        
-       } catch (error) {
-         console.error("Error fetching profile", error);
-      
-       }
-     }
-     getRole();
-   }, []);
+ 
 
   return (
     <div className="explore">
@@ -58,7 +55,7 @@ const Explore = () => {
         <div className="explore-banner-details">
           <h1 className="explore-banner-title">{event.title}</h1>
           <p className="explore-banner-org">
-            By <span className="explore-banner-org-name">{use?.name || "The World Organizers"}</span>
+            By <span className="explore-banner-org-name">{event.organizer_name || "The World Organizers"}</span>
            </p> 
           </div>
        
@@ -128,11 +125,50 @@ const Explore = () => {
               </label>
             <p>NPR {event.common_price}</p>
           </div>
-          <div className="info-item">
-            <button className="explore-buy-ticket-btn" onClick={() => handleBuyTicket(event.id)}>
-              Buy Ticket
-            </button>
-          </div>
+
+
+          <div className="info-item dropdown-wrapper">
+          {user?.role === 'organizer' && user?.email === event.user ? (
+    <div className="organizer-dropdown">
+      <button
+        className="explore-buy-ticket-btn"
+        onClick={() => setDropdownOpen(prev => !prev)}
+      >
+        Manage Event <IoMdArrowDropdown />
+      </button>
+
+      {dropdownOpen && (
+        <div className="dropdown-menu styled-dropdown">
+          <button
+            className="dropdown-item"
+            onClick={() => navigate("/organizer-dashboard/edit-events", { state: { event } })}
+          >
+            <FaEdit className="dropdown-icon" />
+            Edit
+          </button>
+          <button
+            className="dropdown-item"
+            onClick={() => console.log('Delete event', event.id)}
+          >
+            <FaTrash className="dropdown-icon" />
+            Delete
+          </button>
+        </div>
+      )}
+    </div>
+  ) : (
+    <button
+      className="explore-buy-ticket-btn"
+      onClick={() => handleBuyTicket(event.id)}
+    >
+      Buy Ticket
+    </button>
+  )}
+</div>
+
+
+
+
         </div>
 
 

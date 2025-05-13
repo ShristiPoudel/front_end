@@ -29,6 +29,7 @@ const Template = ({ eventList: searchResults = [] }) => {
         const token = localStorage.getItem('authToken');
         const headers = token ? { Authorization: `Token ${token}` } : {};
         const response = await api.get('/events/public-events/', { headers });
+        console.log("events",response.data);
         setEventList(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -110,7 +111,7 @@ const Template = ({ eventList: searchResults = [] }) => {
               key={`card-${index}`}
               event={event}
               onClick={(e) =>
-                navigate('/explore', { state: { events: event } })
+                navigate(`/explore/${event.id}`, { state: { events: event } })
               }
               onFavorite={handleFavorite}
               onBuyTicket={handleBuyTicket}
