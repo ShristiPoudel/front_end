@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { FaSearch } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const NavBar = () => {
   const { user, isLoggedIn } = useAuth();
@@ -61,6 +62,9 @@ const NavBar = () => {
             </button>
             <Link to="/profile">
               <CgProfile className="profile-icon" />
+            </Link>
+            <Link to= "/notifications">
+            <IoMdNotificationsOutline className='notification-icon' />
             </Link>
           </>
         )}

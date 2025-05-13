@@ -1,66 +1,182 @@
-/* .profile-wrapper {
-  display: flex;
-  align-items: flex-start;
-  padding: 30px;
-  max-width: 700px;
-  margin: auto;
-  background-color: rgb(178, 125, 125);
-  color: white;
-  font-family: Arial, sans-serif;
-  border-radius: 12px;
-  gap: 30px;
+.profile-wrapper {
+  width: 100%;
+   margin: 40px;
 }
 
-.profile-photo img {
-  width: 140px;
-  height: 140px;
+
+.profile-section {
+  display: flex;
+  align-items:center;  
+  gap: 50px; 
+  height: 200px;
+  width: 95%;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #edeaea;
+  padding-bottom: 20px;
+}
+
+/* .profile-photo img {
+  margin-left: 70px;
+  width: 200px;
+  height: 500px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
+  border: 3px solid #555;
+} */
+
+
+.profile-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 70px;
 }
 
+.avatar-upload-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #555;
+  transition: 0.3s;
+}
+
+.avatar-input {
+  display: none;
+}
+
+/* .upload-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #1e293b;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.upload-btn:hover {
+  background-color: #374151;
+} */
+
+
 .profile-info {
-  flex: 1;
+   flex: 1; 
 }
 
 .profile-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 80px;
+  margin-bottom: 10px;
 }
 
 .profile-header h2 {
-  margin: 0;
-  font-size: 24px;
+  font-size: 26px;
 }
 
-.profile-header button {
-  background-color: #262626;
-  color: white;
+.class{
+  display: flex;
+  gap: 5px;
+}
+
+
+.class button {
+  background-color:#3657e7;
+  color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
+.profile-header button:hover {
+  background-color: #1f41d6;
+}
+
+.settings-icon {
+  font-size: 28px; 
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 .profile-role {
-  margin: 8px 0;
+  font-size: 15px;
   color: #aaa;
 }
 
-.edit-options {
-  margin-top: 12px;
+
+.my-bar {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  gap:75px;
+  font-size: 20px;
+  margin-bottom: 40px;
+  list-style: none;
 }
 
-.edit-options button {
-  background-color: #333;
-  color: white;
+.my-bar li:hover{
+  color: #1b7dc4;;
+}
+
+.my-bar hr {
   border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  text-align: left;
+  width: 100%;
+  height: 2px;
+  border-radius: 10px;
+  background: #1b7dc4;
+}
+
+.my-events-list p {
+  color: #999;
+}
+
+.template-design {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 93.5%;
+  padding: 0;
   cursor: pointer;
-} */
+  margin-bottom: 45px;
+}
+
+.create-event-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #aaa;
+  background: transparent;
+  cursor: pointer;
+   height: 150px;
+  width: 150px;
+  margin-top: 150px;
+  margin-left: 100px;
+  border-radius: 50%; 
+  transition: border-color 0.2s;
+}
+
+.create-event-button:hover {
+  border-color: #333;
+}
+
+.plus-icon {
+  margin-right: 0.5rem;
+  font-size: 40px;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+  margin-top: 50px;
+}

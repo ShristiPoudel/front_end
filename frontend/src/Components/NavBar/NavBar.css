@@ -132,7 +132,19 @@
     cursor: pointer;
     transition: 0.3s ease;
   }
+
+  .notification-icon {
+    margin-left: 15px;
+    font-size: 32px;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
   
   .profile-icon:hover {
+    color: #4aa4ea;
+  } 
+
+  .notification-icon:hover {
     color: #4aa4ea;
   } 

@@ -1,11 +1,13 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import { GoHeart } from 'react-icons/go';
 import { useLocation } from 'react-router-dom';
 import './Explore.css';
+import api from '../../api/config'
 
 const Explore = () => {
   const location = useLocation();
   const event = location.state?.events;
+  const [use, setUse] = useState(null);
 
   if (!event) {
     return <p>No event details available.</p>;
@@ -19,6 +21,27 @@ const Explore = () => {
     console.log('Buy ticket for:', eventId);
   };
 
+   useEffect(() => {
+     async function getRole() {
+       try {
+         const token = localStorage.getItem('authToken');
+      
+         const headers = {
+           Authorization: `Token ${token}`,
+         };
+
+         const roleResponse = await api.get('/user/profile/', { headers });
+         setUse(roleResponse.data);
+
+        
+       } catch (error) {
+         console.error("Error fetching profile", error);
+      
+       }
+     }
+     getRole();
+   }, []);
+
   return (
     <div className="explore">
       {/* Banner Section */}
@@ -27,15 +50,18 @@ const Explore = () => {
         <div className="explore-banner-overlay">
           <h1 className="explore-banner-title">{event.title}</h1>
           <p className="explore-banner-org">
-            By <span className="explore-banner-org-name">{event.organizer || "The World Organizers"}</span>
+            By <span className="explore-banner-org-name">{use?.name || "The World Organizers"}</span>
           </p>
         </div>
+
+        <div className='explore-favorite-btn-container'>
         <button
           className="explore-favorite-btn"
           onClick={() => handleFavorite(event.id)}
         >
           <GoHeart />
         </button>
+        </div>
       </div>
 
       {/* Categories */}
@@ -58,16 +84,21 @@ const Explore = () => {
           <p>{event.time_start}</p>
         </div>
         <div className="info-item">
-          <strong>Type</strong>
-          <p>{event.duration || '60 min'}</p>
-        </div>
+  <strong>Type</strong>
+  <p>
+    {Array.isArray(event.category) && event.category.length > 0
+      ? event.category.map(cat => cat.name).join(', ')
+      : 'N/A'}
+  </p>
+</div>
+
         <div className="info-item">
           <strong>Location</strong>
           <p>{event.venue_location}</p>
         </div>
         <div className="info-item price-box">
           <strong>Price</strong>
-          <p>${event.common_price}</p>
+          <p>NPR {event.common_price}</p>
         </div>
         <div className="info-item">
           <button className="buy-ticket-btn" onClick={() => handleBuyTicket(event.id)}>

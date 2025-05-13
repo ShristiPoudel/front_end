@@ -3,10 +3,17 @@ import './Profile.css';
 import api from '../../api/config';
 import { useNavigate } from 'react-router-dom';
 import EventCard from '../../Components/EventCard/EventCard';
+import { BsPlusLg } from "react-icons/bs";
+import { IoIosSettings } from "react-icons/io";
+
+
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [myEvents, setMyEvents] = useState([]);
+  const [bar, setBar] = useState("My Events");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,11 +29,9 @@ const Profile = () => {
           Authorization: `Token ${token}`,
         };
 
-        // Fetch user profile
         const profileResponse = await api.get('/user/profile/', { headers });
         setUser(profileResponse.data);
 
-        // Fetch only events created by this user (filtered by backend)
         const eventResponse = await api.get('/events/', { headers });
         setMyEvents(eventResponse.data);
       } catch (error) {
@@ -37,28 +42,92 @@ const Profile = () => {
         }
       }
     }
-
     getProfile();
   }, [navigate]);
 
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreview(URL.createObjectURL(file)); // Show preview immediately
+  
+      // Prepare and upload the image immediately
+      const formData = new FormData();
+      formData.append('avatar', file);
+  
+      const token = localStorage.getItem('authToken');
+      api.post("/user/upload-avatar/", formData, {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        setUser((prevUser) => ({ ...prevUser, avatar: response.data.avatar }));
+        setPreview(response.data.avatar);
+        setSelectedFile(null); // clear the file after upload
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
+    }
+  };
+  
+
+  
+  
+     
+
+  
   if (!user) return <p className="loading-message">Loading profile...</p>;
 
   return (
     <div className="profile-wrapper">
+
+      <div className="profile-section">
       <div className="profile-photo">
-        <img src={user.avatar || "/default-avatar.png"} alt="Profile" />
-      </div>
+  <label className="avatar-upload-label">
+    <img
+      src={preview || user.avatar || "/default-avatar.png"}
+      alt="User Avatar"
+      className="profile-avatar"
+    />
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleFileChange}
+      className="avatar-input"
+    />
+  </label>
+  {/* {selectedFile && (
+    <button className="upload-btn" onClick={handleUpload}>
+      Upload
+    </button>
+  )} */}
+</div>
+
+
 
       <div className="profile-info">
         <div className="profile-header">
           <h2>{user.name}</h2>
+          <div className="class">
           <button>Edit Profile</button>
+          <div className="settings">
+          < IoIosSettings className='settings-icon' />
+          </div> 
+          </div>
         </div>
-        <p className="profile-role">Role: {user.role}</p>
+        <p className="profile-role">{user.role}</p>
       </div>
-
-      <div className="my-events">
-        <h3>My Events</h3>
+      </div>
+        <ul className='my-bar'>
+          <li onClick={()=>setBar("My Events")}>My Events{bar==="My Events" && <hr/>}</li>
+          <li onClick={()=>setBar("Tickets Sold")}>Tickets Sold {bar==="Tickets Sold" && <hr/>}</li>
+          {/* <li onClick={()=>setBar("Notifications")}>Notifications{bar==="Notifications" && <hr/>}</li> */}
+        </ul>
+        <div className="my-events-list">
         {myEvents.length === 0 ? (
           <p>No events created yet.</p>
         ) : (
@@ -72,9 +141,19 @@ const Profile = () => {
                 onBuyTicket={() => {}}
               />
             ))}
+
+             <button
+    className="create-event-button"
+    onClick={() => navigate('/organizer-dashboard/create-events')}
+  >
+    <BsPlusLg className="plus-icon" />
+    {/* <span className="add-label">New</span> */}
+  </button>
           </div>
         )}
       </div>
+   
+
     </div>
   );
 };
