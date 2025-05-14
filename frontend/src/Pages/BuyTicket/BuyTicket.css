@@ -1,32 +1,95 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-  }
-  
-  .modal-content input {
-    width: 60px;
-    padding: 0.5rem;
-    margin: 1rem 0;
-  }
-  
-  .modal-buttons button {
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 16px;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 1.5rem;
+  color:#5c2d91;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  color: #888;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-content label {
+  display: block;
+  margin: 16px 0 8px;
+  font-weight: 500;
+  color: #444;
+  text-align: left;
+}
+
+.modal-content select,
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.modal-content p {
+  font-weight: bold;
+  margin-top: 16px;
+  font-size: 18px;
+  color: #333;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.modal-buttons button {
+  padding: 10px 18px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.modal-buttons .pay-btn {
+  background-color: #5c2d91; 
+  color: #fff;
+}
+
+.modal-buttons .pay-btn:hover {
+  background-color: #4b1f7b;
+}

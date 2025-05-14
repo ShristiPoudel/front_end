@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './BuyTicket.css';
+import { IoMdClose } from 'react-icons/io';
 
 const BuyTicket = ({ event, onClose, onConfirm }) => {
   const [quantity, setQuantity] = useState(1);
@@ -7,8 +8,7 @@ const BuyTicket = ({ event, onClose, onConfirm }) => {
 
   if (!event) return null;
 
-  const price =
-    ticketType === 'vip' ? event.vip_price : event.common_price;
+  const price = ticketType === 'vip' ? event.vip_price : event.common_price;
 
   const handleConfirm = () => {
     onConfirm(quantity, event.id, ticketType);
@@ -18,9 +18,12 @@ const BuyTicket = ({ event, onClose, onConfirm }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>
+          <IoMdClose />
+        </button>
+
         <h3>{event.title}</h3>
 
-        {/* Ticket Type Selection */}
         <label htmlFor="ticketType">Ticket Type:</label>
         <select
           id="ticketType"
@@ -31,7 +34,6 @@ const BuyTicket = ({ event, onClose, onConfirm }) => {
           <option value="vip">VIP - NPR {event.vip_price}</option>
         </select>
 
-        {/* Quantity */}
         <label htmlFor="ticketQty">Quantity:</label>
         <input
           id="ticketQty"
@@ -41,12 +43,11 @@ const BuyTicket = ({ event, onClose, onConfirm }) => {
           onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
         />
 
-        {/* Total */}
         <p>Total: NPR {price * quantity}</p>
 
         <div className="modal-buttons">
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={handleConfirm}>Pay</button>
+          
+          <button className="pay-btn" onClick={handleConfirm}>Pay via Khalti</button>
         </div>
       </div>
     </div>

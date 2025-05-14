@@ -5,6 +5,7 @@ import "./CreateEvent.css";
 import api from '../../api/config';
 import { useNavigate } from 'react-router-dom';
 
+
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -63,7 +64,10 @@ const CreateEvent = () => {
         },
       });
       toast.success("Event created successfully!");
-       navigate("/")
+      setTimeout(()=>{
+        navigate("/")
+      },1000)
+       
       console.log(response.data);
     } catch (error) {
       console.error("Error creating event:", error.response?.data || error.message);

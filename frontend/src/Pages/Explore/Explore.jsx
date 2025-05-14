@@ -15,7 +15,8 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import BuyTicket from '../../Pages/BuyTicket/BuyTicket';
+import axios from 'axios';
 
 
 const Explore = () => {
@@ -27,6 +28,9 @@ const Explore = () => {
   const[event,setEvent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [eventList, setEventList] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   
   useEffect(() => {
@@ -38,15 +42,59 @@ const Explore = () => {
   }, [event, id]);
 
   if (!event) {
-    return <p>Loading event details...</p>; // or spinner
+    return <p>Loading event details...</p>; 
   }
   const handleFavorite = (eventId) => {
     console.log('Added to favorites:', eventId);
   };
 
   const handleBuyTicket = (eventId) => {
-    console.log('Buy ticket for:', eventId);
+    const userRole = user?.role;
+
+    
+    if (userRole === 'organizer' && user?.email !== event.user) {
+      toast.error('Login as Attendee'); 
+    } else {
+      console.log('Buy ticket for:', eventId);
+      }
+
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+      setSelectedEvent(event);
+      setShowModal(true);
   };
+
+  const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      };
+
+      const response = await axios.post(
+        `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
+        { ticket_type: ticketType, quantity },
+        { headers }
+      );
+
+      if (response.data.payment_url) {
+        window.location.href = response.data.payment_url;
+      }
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      toast.success('Failed to initiate payment. Please try again.');
+    }
+  };
+
 
   const handleDelete = async (eventId) => {
     try {
@@ -289,6 +337,14 @@ const Explore = () => {
     </div>
   </div>
 )}
+
+{showModal && selectedEvent && (
+        <BuyTicket
+          event={selectedEvent}
+          onClose={() => setShowModal(false)}
+          onConfirm={handleConfirmPurchase}
+        />
+      )}
 
     </div>
   );

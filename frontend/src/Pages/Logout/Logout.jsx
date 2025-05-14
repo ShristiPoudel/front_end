@@ -9,7 +9,7 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    toast.success("You've successfully logged out!", { autoClose: 3000 });
+    toast.success("You've successfully logged out!", { autoClose: 1000 });
 
     setTimeout(() => {
       logoutUser(); 

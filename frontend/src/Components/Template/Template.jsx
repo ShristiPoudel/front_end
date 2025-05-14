@@ -13,8 +13,8 @@ const Template = ({ eventList: searchResults = [] }) => {
   const navigate = useNavigate();
   const [eventList, setEventList] = useState([]);
   const [day, setDay] = useState("All");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  // const [showModal, setShowModal] = useState(false);
+  // const [selectedEvent, setSelectedEvent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 14;
 
@@ -58,33 +58,33 @@ const Template = ({ eventList: searchResults = [] }) => {
     setShowModal(true);
   };
 
-  const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+  // const handleConfirmPurchase = async (quantity, eventId, ticketType = 'common') => {
+  //   const token = localStorage.getItem('authToken');
+  //   if (!token) {
+  //     navigate('/login');
+  //     return;
+  //   }
 
-    try {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      };
+  //   try {
+  //     const headers = {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Token ${token}`,
+  //     };
 
-      const response = await axios.post(
-        `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
-        { ticket_type: ticketType, quantity },
-        { headers }
-      );
+  //     const response = await axios.post(
+  //       `http://127.0.0.1:8000/events/${eventId}/khalti-initiate/`,
+  //       { ticket_type: ticketType, quantity },
+  //       { headers }
+  //     );
 
-      if (response.data.payment_url) {
-        window.location.href = response.data.payment_url;
-      }
-    } catch (error) {
-      console.error('Error initiating payment:', error);
-      toast.success('Failed to initiate payment. Please try again.');
-    }
-  };
+  //     if (response.data.payment_url) {
+  //       window.location.href = response.data.payment_url;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error initiating payment:', error);
+  //     toast.success('Failed to initiate payment. Please try again.');
+  //   }
+  // };
 
   const totalPages = Math.ceil(eventList.length / eventsPerPage);
   const visibleEvents = eventList.slice(0, currentPage * eventsPerPage);
@@ -151,13 +151,14 @@ const Template = ({ eventList: searchResults = [] }) => {
 </div>
 
 
+{/* 
       {showModal && selectedEvent && (
         <BuyTicket
           event={selectedEvent}
           onClose={() => setShowModal(false)}
           onConfirm={handleConfirmPurchase}
         />
-      )}
+      )} */}
     </div>
   );
 };

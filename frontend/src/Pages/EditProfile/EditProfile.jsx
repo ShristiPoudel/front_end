@@ -126,7 +126,7 @@ const EditProfile = () => {
           />
         </div>
 
-        <div className="profile-group">
+        {/* <div className="profile-group">
           <label htmlFor="gender">Gender:</label>
           <select
             name="gender"
@@ -140,7 +140,7 @@ const EditProfile = () => {
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-        </div>
+        </div> */}
 
         <div className="profile-group">
           <label htmlFor="bio">Bio:</label>

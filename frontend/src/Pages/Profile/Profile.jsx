@@ -8,9 +8,6 @@ import { IoIosSettings } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
 
 
-
-
-
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [myEvents, setMyEvents] = useState([]);
