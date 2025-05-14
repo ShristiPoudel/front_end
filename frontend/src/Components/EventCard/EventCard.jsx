@@ -17,7 +17,7 @@ const EventCard = ({ event, onClick, onFavorite, onBuyTicket }) => {
         </button>
       </div>
       <img src={event.image} alt={event.title} />
-      <p>{event.title}</p>
+      <p style={{ fontWeight: 'bold' }}>{event.title}</p>
       <div className="event-category">
         Category: {event.category.map(cat => cat.name).join(', ')}
       </div>

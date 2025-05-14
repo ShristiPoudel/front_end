@@ -66,7 +66,9 @@ const Explore = () => {
   
       console.log("Delete response:", response);
       toast.success("Event deleted successfully");
-      navigate("/");
+      setTimeout(()=>{
+        navigate("/")
+      },1000)
       
     } catch (err) {
       console.error("Full delete error:", {

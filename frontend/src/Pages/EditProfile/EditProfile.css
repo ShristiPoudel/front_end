@@ -1,0 +1,103 @@
+.profile-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); */
+    box-sizing: border-box;
+  }
+  
+  .profile-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+  
+  .edit-profile-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .profile-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 15px;
+  }
+  
+  .profile-group input,
+  .profile-group select,
+  .profile-group textarea {
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #dcdfe3;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdfd;
+  }
+  
+  .profile-group input:focus,
+  .profile-group textarea:focus,
+  .profile-group select:focus {
+    outline: none;
+    border-color: #2c9cf0;
+    box-shadow: 0 0 0 3px rgba(44, 156, 240, 0.15);
+  }
+  
+  .image-preview {
+    margin-top: 12px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #2c9cf0;
+    align-self: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .image-preview:hover {
+    transform: scale(1.05);
+  }
+  
+  .submit-btn {
+    background-color: #2c9cf0;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #1a83d1;
+  }
+  
+  @media (max-width: 600px) {
+    .profile-container {
+      padding: 25px 20px;
+    }
+  
+    .image-preview {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .submit-btn {
+      padding: 12px;
+      font-size: 15px;
+    }
+  }
+  

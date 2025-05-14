@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Explore from './Pages/Explore/Explore';
 import BuyTicket from './Pages/BuyTicket/BuyTicket';
 import EditEvent from './Pages/EditEvent/EditEvent';
+import EditProfile from './Pages/EditProfile/EditProfile';
 
 const App = () => {
   const { user, isLoggedIn, loading } = useAuth();
@@ -42,6 +43,8 @@ const App = () => {
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path='/buy-ticket' element={<BuyTicket/>}/>
+            <Route path='/edit-profile' element={<EditProfile/>}/>
+
 
             {/* Auth-only (common) */}
             <Route element={<ProtectedRoute />}>

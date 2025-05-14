@@ -10,6 +10,7 @@ import { FaPlus } from "react-icons/fa";
 
 
 
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [myEvents, setMyEvents] = useState([]);
@@ -115,7 +116,11 @@ const Profile = () => {
         <div className="profile-header">
           <h2>{user.name}</h2>
           <div className="class">
-          <button>Edit Profile</button>
+          <button 
+         onClick={() => navigate('/edit-profile')}
+          >Edit Profile
+
+          </button>
           <div className="settings">
           < IoIosSettings className='settings-icon' />
           </div> 
@@ -138,7 +143,7 @@ const Profile = () => {
               <EventCard
                 key={event.id}
                 event={event}
-                onClick={() => navigate('/explore', { state: { events: event } })}
+                onClick={() => navigate(`/explore/${event.id}`)}
                 onFavorite={() => {}}
                 onBuyTicket={() => {}}
               />

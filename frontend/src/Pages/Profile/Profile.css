@@ -136,10 +136,6 @@
   background: #1b7dc4;
 }
 
-.my-events-list p {
-  color: #999;
-}
-
 .template-design {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
