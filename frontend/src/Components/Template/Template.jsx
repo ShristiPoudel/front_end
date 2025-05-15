@@ -17,6 +17,13 @@ const Template = ({ eventList: searchResults = [] }) => {
   // const [selectedEvent, setSelectedEvent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 14;
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth > 630 && window.innerWidth < 800
+  );
+  const [isSmallMobile, setIsSmallMobile] = useState(
+    window.innerWidth <= 630
+  );
+
 
   useEffect(() => {
     if (searchResults.length > 0) {
@@ -40,6 +47,17 @@ const Template = ({ eventList: searchResults = [] }) => {
     }
 
     fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width > 630 && width < 800);
+      setIsSmallMobile(width <= 630);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleFavorite = (eventId) => {
@@ -95,6 +113,7 @@ const Template = ({ eventList: searchResults = [] }) => {
     }
   };
 
+
   return (
     <div className="template-container">
       <ul className="filter-tabs">
@@ -117,16 +136,22 @@ const Template = ({ eventList: searchResults = [] }) => {
               onBuyTicket={handleBuyTicket}
             />
           );
-
-          if (index === 8) {
-            return [
-              <div key="spacer-1" className="grid-spacer"></div>,
+          if (isMobile && index === 6) {
+          return [
+            <div key="spacer-1" className="grid-spacer"></div>,
               <div key="spacer-2" className="grid-spacer"></div>,
-              card,
-            ];
-          }
+            card
+          ];
+        }
+        else if (!isMobile && !isSmallMobile && index === 8) {
+          return [
+            <div key="spacer-1" className="grid-spacer"></div>,
+              <div key="spacer-2" className="grid-spacer"></div>,
+            card
+          ];
+        }
 
-          return [card];
+        return [card];
         })}
       </div>
 

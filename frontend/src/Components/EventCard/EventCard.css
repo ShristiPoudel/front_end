@@ -27,7 +27,7 @@
   
   .event-card p {
     margin: 10px;
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #171717;
   }
@@ -37,7 +37,7 @@
   .price {
     margin: 10px;
     color: #8c8c8c;
-    font-size: 14px;
+    font-size: 0.8rem;
   }
   
   .time-date {
@@ -95,7 +95,7 @@
     padding: 8px 16px;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
     transition: background 0.3s ease;
   }
   
@@ -103,4 +103,37 @@
     border: 1px solid #1b7dc4;
     color: #1b7dc4;
   }
+  @media (min-width:1050px)and (max-width:1300px) {
+    .buy-ticket-btn{
+      padding: 0.3rem;
+    }
+  }
+  @media screen and (max-width: 1050px) {
+    .buy-ticket-btn{
+      display: none;
+    }  
+  }
+  @media (min-width:800px)and (max-width:1050px) {
+    .event-card img{
+      margin: 14px 14px 0;
+    }
+    .event-category, .time-date{
+      margin: 10px 10px 0;
+    }
+    .time-date{
+      flex-direction: column;
+    }
+  }
   
+  @media (min-width:630px)and (max-width:730px) {
+
+    .event-card img{
+      margin: 14px 14px 0;
+    }
+    .event-category, .time-date{
+      margin: 10px 10px 0;
+    }
+    .time-date{
+      flex-direction: column;
+    }
+  }
