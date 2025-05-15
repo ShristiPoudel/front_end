@@ -9,7 +9,6 @@ import Feedback from './Pages/FeedBack/FeedBack';
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import Profile from './Pages/Profile/Profile';
 import Footer from './Components/Footer/Footer';
-import BookEvent from './Pages/BookEvent/BookEvent';
 import Logout from './Pages/Logout/Logout';
 import SignUp from './Pages/SignUp/SignUp';
 import Login from './Pages/Login/Login';
@@ -22,6 +21,8 @@ import Explore from './Pages/Explore/Explore';
 import BuyTicket from './Pages/BuyTicket/BuyTicket';
 import EditEvent from './Pages/EditEvent/EditEvent';
 import EditProfile from './Pages/EditProfile/EditProfile';
+import MyTicket from './Pages/MyTicket/MyTicket'
+
 
 const App = () => {
   const { user, isLoggedIn, loading } = useAuth();
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path='/buy-ticket' element={<BuyTicket/>}/>
             <Route path='/edit-profile' element={<EditProfile/>}/>
+         
 
 
             {/* Auth-only (common) */}
@@ -60,7 +62,7 @@ const App = () => {
 
             {/* Attendee-Only Routes */}
             <Route element={<ProtectedRoute allowedRoles={['attendee']} />}>
-              <Route path="/attendee-dashboard/book-event" element={<BookEvent />} />
+              <Route path="/attendee-dashboard/book-event" element={<MyTicket/>} />
               <Route path="/attendee-dashboard/feedback" element={<Feedback />} />
             </Route>
 

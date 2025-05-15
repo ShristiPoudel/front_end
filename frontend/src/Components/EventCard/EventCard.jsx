@@ -1,13 +1,16 @@
-import React from 'react';
-import { GoHeart } from 'react-icons/go';
+import React, { useEffect, useState } from 'react';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'; // ✅ Import navigate
+import { useNavigate } from 'react-router-dom';
+import api from '../../api/config';
 import './EventCard.css';
 
-const EventCard = ({ event, onClick, onFavorite, onBuyTicket }) => {
+const EventCard = ({ event, onClick }) => {
   const { user, isLoggedIn } = useAuth();
-  const navigate = useNavigate(); // ✅ Setup navigation
+  const [interested, setInterested] = useState(false);
+  const [interestCount, setInterestCount] = useState(event.interest_count || 0);  
+  const navigate = useNavigate();
 
   const userRole = user?.role;
   const isOrganizer = user?.email === event.user;
@@ -17,33 +20,56 @@ const EventCard = ({ event, onClick, onFavorite, onBuyTicket }) => {
 
     if (!isLoggedIn) {
       toast.error('Please log in to buy a ticket');
-      setTimeout(()=>{
-        navigate("/login")
-
-      },1500)
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
       return;
     }
 
     if (userRole === 'organizer' && !isOrganizer) {
       toast.error('Login as Attendee');
     } else {
-      navigate(`/explore/${event.id}`); // ✅ Navigate to explore page for this event
+      navigate(`/explore/${event.id}`);
     }
   };
 
+  const handleFavoriteClick = async (e) => {
+    e.stopPropagation();
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+  
+    try {
+      const headers = {
+        Authorization: `Token ${token}`,
+      };
+  
+      
+      const res = await api.post(`/events/${event.id}/interest/`, {}, { headers });
+  
+      setInterested(res.data.interested);
+      setInterestCount(res.data.interest_count);
+    } catch (error) {
+      console.error('Error updating interest:', error);
+      toast.error('Failed to update interest');
+    }
+  };
+  
+
   return (
     <div className="event-card" onClick={() => onClick && onClick(event)}>
+    
       <div className="favorite-btn-container">
-        <button
-          className="favorite-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            onFavorite && onFavorite(event.id);
-          }}
-        >
-          <GoHeart />
-        </button>
-      </div>
+  <button className="favorite-btn" onClick={handleFavoriteClick}>
+    {interested ? <GoHeartFill color="red" /> : <GoHeart />}
+  </button>
+  <span className="interest-count">{interestCount}</span>
+</div>
+
+
+  
 
       <img src={event.image} alt={event.title} />
       <p style={{ fontWeight: 'bold' }}>{event.title}</p>
