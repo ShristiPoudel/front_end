@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import api from '../../api/config';
 import EventCard from '../../Components/EventCard/EventCard';
 import { useAuth } from '../../context/AuthContext';
@@ -9,7 +9,7 @@ import './DiscoverEvents.css'
 const DiscoverEvents = () => {
   const location = useLocation();
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const { token } = useAuth();
+  const { token } = useAuth(); 
 
   useEffect(() => {
     const fetchFilteredEvents = async () => {
@@ -17,11 +17,12 @@ const DiscoverEvents = () => {
         const searchParams = new URLSearchParams(location.search);
         const paramsObject = Object.fromEntries(searchParams.entries());
 
-        const token = localStorage.getItem("token");
+       
+        const authToken = localStorage.getItem('authToken');
 
         const response = await api.get('/events/public-events/', {
           params: paramsObject,
-          headers: token ? { Authorization: `Token ${token}` } : {}
+          headers: authToken ? { Authorization: `Token ${authToken}` } : {}
         });
         
         setFilteredEvents(response.data);
@@ -32,20 +33,29 @@ const DiscoverEvents = () => {
     };
 
     fetchFilteredEvents();
-  }, [location.search, token]);
+  }, [location.search]);
 
   return (
     <div className="discover-events-page">
       <h2 className='discovered'>Discovered Events</h2>
-      {filteredEvents.length > 0 ? (
+     <div className="template-container">
+     {filteredEvents.length > 0 ? (
         <div className="template-design">
           {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <Link 
+              key={event.id} 
+              to={`/explore/${event.id}`} 
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <EventCard event={event} />
+            </Link>
           ))}
         </div>
+    
       ) : (
         <p className='discovered-p'>No events found.</p>
       )}
+       </div>
     </div>
   );
 };
