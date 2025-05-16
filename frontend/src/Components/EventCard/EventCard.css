@@ -59,6 +59,9 @@
     top: 24px;
     right: 20px;
     z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
   
   .favorite-btn {
@@ -79,6 +82,14 @@
   .favorite-btn:hover {
     color: #ff4757;
     background: rgba(255, 255, 255, 0.9);
+  }
+
+  .interest-count {
+    font-size: 1rem;
+    color: #333;
+    user-select: none;
+    min-width: 16px; /* to keep space consistent */
+    text-align: left;
   }
   
   .buy-ticket-btn-container {

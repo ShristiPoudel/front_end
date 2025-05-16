@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { GoHeart } from 'react-icons/go';
 import { useLocation } from 'react-router-dom';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { useInterest } from '../../context/InterestContext';
 import './Explore.css';
 import api from '../../api/config';
 import locationMap from '../../assets/location.jpg'
@@ -24,6 +25,9 @@ const Explore = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
+
+
   const { user } = useAuth();
   const[event,setEvent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -31,6 +35,10 @@ const Explore = () => {
   const [showModal, setShowModal] = useState(false);
   const [eventList, setEventList] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const { isInterested, markInterested, unmarkInterested } = useInterest();
+const [interested, setInterested] = useState(false);
+const [interestCount, setInterestCount] = useState(0);
 
   
   useEffect(() => {
@@ -41,12 +49,68 @@ const Explore = () => {
     }
   }, [event, id]);
 
+
+  useEffect(() => {
+    if (!event && id) {
+      api.get(`/events/public-events/${id}/`)
+        .then(response => {
+          setEvent(response.data);
+          setInterestCount(response.data.interest_count || 0);
+        })
+        .catch(error => console.error('Error fetching event:', error));
+    }
+  }, [event, id]);
+  
+  useEffect(() => {
+    if (event) {
+      setInterested(isInterested(event.id));
+    }
+  }, [event, isInterested]);
+  
+
   if (!event) {
     return <p>Loading event details...</p>; 
   }
-  const handleFavorite = (eventId) => {
-    console.log('Added to favorites:', eventId);
+  const handleFavorite = async (eventId) => {
+    const token = localStorage.getItem('authToken');
+    const userRole = user?.role;
+  
+    if (!token) {
+      toast.error('Please log in to show interest');
+      navigate('/login');
+      return;
+    }
+  
+    if (userRole !== 'attendee') {
+      toast.error('Login as Attendee to show interest');
+      return;
+    }
+  
+    try {
+      const headers = {
+        Authorization: `Token ${token}`,
+      };
+  
+      const res = await api.post(`/events/${eventId}/interest/`, {}, { headers });
+  
+      const updatedInterested = res.data.interested;
+      // const updatedCount = res.data.interest_count;
+  
+      setInterested(updatedInterested);
+      // setInterestCount(updatedCount);
+  
+      // Sync with global context
+      if (updatedInterested) {
+        markInterested(eventId);
+      } else {
+        unmarkInterested(eventId);
+      }
+    } catch (error) {
+      console.error('Error updating interest:', error);
+      toast.error('Failed to update interest');
+    }
   };
+  
 
   const handleBuyTicket = (eventId) => {
     const userRole = user?.role;
@@ -145,14 +209,18 @@ const Explore = () => {
           </div>
        
 
-        <div className='explore-favorite-btn-container'>
-        <button
-          className="explore-favorite-btn"
-          onClick={() => handleFavorite(event.id)}
-        >
-          <GoHeart />
-        </button>
-        </div>
+          <div className='explore-favorite-btn-container'>
+  <button
+    className="explore-favorite-btn"
+    onClick={() => handleFavorite(event.id)}
+  >
+    {interested ? <GoHeartFill color="red" /> : <GoHeart />}
+  </button>
+  {interestCount > 0 && <span className="interest-count">{interestCount}</span>}
+</div>
+
+
+        
       </div>
 
       {/* Categories */}
@@ -201,14 +269,22 @@ const Explore = () => {
             <IoLocationOutline className="info-icon" />
               Location
               </label>
-            <p>{event.venue_location}</p>
+            <p>{event.venue_name}</p>
           </div>
           <div className="info-item price-box">
             <label>
             <LiaRupeeSignSolid className="info-icon" />
-              Price
+              Common
               </label>
             <p>NPR {event.common_price}</p>
+          </div>
+
+          <div className="info-item ">
+            <label>
+            <LiaRupeeSignSolid className="info-icon" />
+               VIP
+              </label>
+            <p>NPR {event.vip_price}</p>
           </div>
 
 

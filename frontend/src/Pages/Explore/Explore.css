@@ -69,6 +69,7 @@
 }
 
 
+
 /* Tag badges */
 .explore-tags {
   display: flex;
@@ -113,9 +114,9 @@
 .explore-info-bar {
   position: absolute;
   top: 90px; 
-  left: 45%;
+  left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 85%;
   z-index: 2;
   background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -125,7 +126,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
 }
 
 

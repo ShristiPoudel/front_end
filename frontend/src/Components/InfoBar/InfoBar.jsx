@@ -26,10 +26,10 @@ const InfoBar = () => {
            Price
          </label>
          <select>
-           <option value="">$ - $$$</option>
-           <option value="1">$</option>
-           <option value="2">$$</option>
-           <option value="3">$$$</option>
+           <option value="">NPR</option>
+           <option value="1">0 - 1000</option>
+           <option value="2">1000 - 2000</option>
+           <option value="3">above 2000</option>
          </select>
        </div>
        
