@@ -118,6 +118,7 @@ const CreateEvent = () => {
               id="event_dates"
               name="event_dates"
               value={formData.event_dates}
+              min={new Date().toISOString().split('T')[0]}
               onChange={handleChange}
               required
             />

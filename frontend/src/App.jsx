@@ -22,6 +22,8 @@ import BuyTicket from './Pages/BuyTicket/BuyTicket';
 import EditEvent from './Pages/EditEvent/EditEvent';
 import EditProfile from './Pages/EditProfile/EditProfile';
 import MyTicket from './Pages/MyTicket/MyTicket'
+import DiscoverEvents from './Pages/DiscoverEvents/DiscoverEvents';
+
 
 
 const App = () => {
@@ -45,6 +47,8 @@ const App = () => {
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path='/buy-ticket' element={<BuyTicket/>}/>
             <Route path='/edit-profile' element={<EditProfile/>}/>
+            <Route path="/discover-events" element={<DiscoverEvents />} />
+
          
 
 
