@@ -8,7 +8,7 @@ const TicketCard = ({ ticket }) => {
 <div className="ticket-card">
   
       <div className="ticket-header">
-       <img src={logo} alt="EventHub Logo" /> 
+       <img src={logo} alt="EventHub Logo" className='logo-img' /> 
        <div className="header-text">
        <div className="logo">{ticket.event_title}</div>
         <div className="location">

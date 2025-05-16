@@ -225,7 +225,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="post">
-            <button type="submit">Create Event:</button>
+            <button type="submit">Create Event</button>
           </div>
         </form>
       </div>
