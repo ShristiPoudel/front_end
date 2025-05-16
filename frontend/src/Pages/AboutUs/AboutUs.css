@@ -1,0 +1,140 @@
+/* AboutUs.css */
+
+.aboutus {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  /* Header Section */
+  .aboutus-header {
+    background: linear-gradient(to right, #dbeafe, #bfdbfe);
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .aboutus-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+  }
+  
+  .aboutus-header p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  
+  /* Story Section */
+  .aboutus-story {
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .aboutus-story img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .aboutus-story-content h2 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    margin-bottom: 16px;
+  }
+  
+  .aboutus-story-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Values Section */
+  .aboutus-values {
+    background-color: #f1f5f9;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .aboutus-values h2 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+  }
+  
+  .aboutus-value-boxes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .aboutus-value-box {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .aboutus-value-box h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 10px;
+  }
+  
+  .aboutus-value-box p {
+    font-size: 0.95rem;
+    color: #666;
+  }
+  
+  /* CTA Section */
+  .aboutus-cta {
+    background: #dbeafe;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .aboutus-cta h2 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+  }
+  
+  .aboutus-cta p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 30px;
+  }
+  
+  .aboutus-cta a {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .aboutus-cta a:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+    .aboutus-story {
+      grid-template-columns: 1fr 1fr;
+      padding: 80px 60px;
+    }
+  
+    .aboutus-values .aboutus-value-boxes {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }

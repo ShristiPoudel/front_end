@@ -9,8 +9,6 @@ const EditProfile = () => {
   const [profileData, setProfileData] = useState({
     name: "",
     bio: "",
-    website: "",
-    gender: "",
     image: null,
   });
 
@@ -32,13 +30,11 @@ const EditProfile = () => {
         setProfileData({
           name: data.name || "",
           bio: data.bio || "",
-          website: data.website || "",
-          gender: data.gender || "",
-          image: null, // don't preload file
+          image: null,
         });
 
-        if (data.avatar) {
-          setPreviewImage(data.avatar); // Set existing avatar as preview
+        if (data.imgae) {
+          setPreviewImage(data.image);
         }
       } catch (err) {
         console.error("Failed to fetch profile", err);
@@ -66,8 +62,6 @@ const EditProfile = () => {
     const formData = new FormData();
     formData.append("name", profileData.name);
     formData.append("bio", profileData.bio);
-    formData.append("website", profileData.website);
-    formData.append("gender", profileData.gender);
     if (profileData.image) {
       formData.append("image", profileData.image);
     }
@@ -79,7 +73,8 @@ const EditProfile = () => {
         "Content-Type": "multipart/form-data",
       };
 
-      await api.put("/users/profile", formData, { headers });
+      // You can also use PATCH here if your backend supports partial updates
+      await api.patch("/user/profile/", formData, { headers });
 
       toast.success("Profile updated successfully!");
       setTimeout(() => {
@@ -126,22 +121,6 @@ const EditProfile = () => {
           />
         </div>
 
-        {/* <div className="profile-group">
-          <label htmlFor="gender">Gender:</label>
-          <select
-            name="gender"
-            id="gender"
-            value={profileData.gender}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div> */}
-
         <div className="profile-group">
           <label htmlFor="bio">Bio:</label>
           <textarea
@@ -150,19 +129,6 @@ const EditProfile = () => {
             placeholder="Change your bio"
             rows="5"
             value={profileData.bio}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="profile-group">
-          <label htmlFor="website">Social Media:</label>
-          <input
-            type="text"
-            id="website"
-            name="website"
-            placeholder="Website, LinkedIn, Facebook..."
-            value={profileData.website}
             onChange={handleChange}
             required
           />
