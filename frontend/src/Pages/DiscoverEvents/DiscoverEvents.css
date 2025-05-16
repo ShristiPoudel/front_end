@@ -7,6 +7,38 @@
  .discovered-p{
     margin: 30px auto;
     text-align: center;
-
  }
-  
+
+ 
+
+.load-more-events-filter{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   margin-bottom: 80px;
+ }
+ 
+ .load-more-events::before,
+ .load-more-events::after {
+   content: "";
+   flex: 1;
+   height: 1px;
+   background-color: #a4a1a1;
+   margin: 0 12px;
+ }
+ 
+ .load-more-events-btn-filter{
+   background-color: #5d5b5b;
+   color: #fff;
+   border: none;
+   border-radius: 50px;
+   padding: 10px 30px;
+   font-size: 0.7rem;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+ }
+ 
+ .load-more-events-btn-filter:hover {
+   background-color: #878585; 
+ }
