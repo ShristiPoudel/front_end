@@ -6,19 +6,16 @@ import EventCard from '../../Components/EventCard/EventCard';
 import { BsPlusLg } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { FaTicketAlt, FaChartBar, FaCalendarAlt, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { useInterest } from '../../context/InterestContext'; // import your InterestContext hook
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [myEvents, setMyEvents] = useState([]);
   const [ticketStats, setTicketStats] = useState({});
-  const [publicEvents, setPublicEvents] = useState([]); // for attendee favorite filtering
   const [favorites, setFavorites] = useState([]);
   const [bar, setBar] = useState("My Events");
   const [barAttendee, setBarAttendee] = useState("My Favourites");
   const [preview, setPreview] = useState(null);
   const navigate = useNavigate();
-  const { isInterested } = useInterest();
 
   useEffect(() => {
     async function getProfile() {
@@ -38,11 +35,9 @@ const Profile = () => {
         setPreview(profileResponse.data.image);
 
         if (profileResponse.data.role === "organizer") {
-          // Organizer: fetch their events
           const eventResponse = await api.get('/events/', { headers });
           setMyEvents(eventResponse.data);
 
-          // Fetch ticket stats for each event
           const stats = {};
           for (const event of eventResponse.data) {
             try {
@@ -55,13 +50,12 @@ const Profile = () => {
           setTicketStats(stats);
 
         } else if (profileResponse.data.role === "attendee") {
-          // Attendee: fetch all public events for filtering favorites
-          const publicEventsResponse = await api.get('/events/public-events/', { headers });
-          setPublicEvents(publicEventsResponse.data);
-
-          // Filter favorites using isInterested from context
-          const favEvents = publicEventsResponse.data.filter(event => isInterested(event.id));
-          setFavorites(favEvents);
+          try {
+            const interestResponse = await api.get('/events/interest-events/', { headers });
+            setFavorites(interestResponse.data);
+          } catch (interestError) {
+            console.error("Failed to fetch interested events", interestError);
+          }
         }
 
       } catch (error) {
@@ -74,7 +68,7 @@ const Profile = () => {
     }
 
     getProfile();
-  }, [navigate, isInterested]);
+  }, [navigate]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -204,7 +198,7 @@ const Profile = () => {
         </div>
       )}
 
-      {bar === "Favorites" && user.role === "attendee" && (
+      {barAttendee === "My Favourites" && user.role === "attendee" && (
         <div className="favorites-list">
           {favorites.length === 0 ? (
             <p>You have not marked any events as favorite yet.</p>
@@ -221,7 +215,6 @@ const Profile = () => {
           )}
         </div>
       )}
-
     </div>
   );
 };

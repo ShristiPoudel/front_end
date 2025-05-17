@@ -1,4 +1,5 @@
 import React from "react";
+import about from '../../assets/about.jpg';
 import './AboutUs.css';
 
 export default function AboutUs() {
@@ -13,7 +14,7 @@ export default function AboutUs() {
 
       <section className="aboutus-story">
         <img
-          src="https://assets-api.kathmandupost.com/thumb.php?src=https://assets-cdn.kathmandupost.com/uploads/source/news/2024/third-party/music%20festival.png&w=900&height=601"
+          src={about}
           alt="EventHub Team Celebrating"
         />
         <div className="aboutus-story-content">

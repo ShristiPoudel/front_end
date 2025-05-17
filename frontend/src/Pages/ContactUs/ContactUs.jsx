@@ -40,8 +40,8 @@ export default function ContactUs() {
       <section className="contactus-info">
         <h2>Other Ways to Reach Us</h2>
         <p>Email: support@eventhub.com</p>
-        <p>Phone: +977-123-4567890</p>
-        <p>Address: EventHub HQ, Kathmandu, Nepal</p>
+        <p>Phone: +977-9800000001</p>
+        <p>Address: EventHub HQ, Pokhara, Nepal</p>
       </section>
     </div>
   );

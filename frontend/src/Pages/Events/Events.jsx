@@ -5,6 +5,8 @@ import '../../Components/Template/Template.css'; // for .template-design styles
 import EventCard from '../../Components/EventCard/EventCard';
 import { useNavigate, Link } from 'react-router-dom';
 
+
+
 const categoryMap = {
   'Music & Concerts': ['music', 'concerts'],
   'Arts & Culture': ['arts', 'culture'],
@@ -29,7 +31,7 @@ const Events = () => {
           'Arts & Culture': [],
           'Tech & Workshops': [],
           'Games & Sports': [],
-          'Entertainment': [],
+          'Entertainments': [],
         };
 
         allEvents.forEach(event => {
@@ -45,7 +47,7 @@ const Events = () => {
           }
 
           if (!matched) {
-            grouped['Entertainment'].push(event);
+            grouped['Entertainments'].push(event);
           }
         });
 

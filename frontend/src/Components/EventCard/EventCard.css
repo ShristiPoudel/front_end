@@ -86,9 +86,9 @@
 
   .interest-count {
     font-size: 1rem;
-    color: #333;
+    color: white;
     user-select: none;
-    min-width: 16px; /* to keep space consistent */
+    min-width: 16px; 
     text-align: left;
   }
   
