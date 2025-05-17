@@ -1,11 +1,11 @@
 .login-page {
-    padding-top:px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100%;
     background: #f4f4f4;
+    z-index: -100000;
 }
 
 
@@ -94,4 +94,53 @@
     padding: 10px;
     font-size:19px;
     
+}
+
+@media (max-width: 768px) {
+    .login {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .login h2 {
+        font-size: 28px;
+    }
+
+    .login-btn button {
+        font-size: 18px;
+    }
+
+    .login p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .login h2 {
+        font-size: 24px;
+    }
+
+    .login-input-fields input {
+        font-size: 16px;
+        height: 30px;
+    }
+
+    .login-btn button {
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .login-signup-agree {
+        font-size: 12px;
+    }
+
+    .login p {
+        font-size: 15px;
+    }
 }
