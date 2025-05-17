@@ -26,6 +26,7 @@ import DiscoverEvents from './Pages/DiscoverEvents/DiscoverEvents';
 import Notifications from './Pages/Notifications/Notifications';
 import ResetPass from './Pages/ResetPassword/ResetPass';
 import ResetRequest from './Pages/ResetPassword/ResetRequest';
+import ChangePassword from './Pages/ChangePassword/ChangePassword'
 
 
 
@@ -56,12 +57,14 @@ const App = () => {
 
             <Route path="/reset-password-request" element={<ResetRequest />} />
             <Route path="/reset-password" element={<ResetPass />} />
+            <Route path="/change-password" element={<ChangePassword/>} />
 
 
             {/* Auth-only (common) */}
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/log-out" element={<Logout />} />
+           
             </Route>
 
             {/* Organizer-Only Routes */}

@@ -120,8 +120,14 @@ const Profile = () => {
             <div className="class">
               <button onClick={() => navigate('/edit-profile')}>Edit Profile</button>
               <div className="settings">
-                <IoIosSettings className='settings-icon' />
-              </div>
+                 <IoIosSettings
+                     className="settings-icon"
+                     onClick={() => navigate('/change-password')}
+                        title="Change Password"
+                          style={{ cursor: 'pointer' }}
+                           />
+</div>
+
             </div>
           </div>
           <p className="profile-role">{user.role}</p>
