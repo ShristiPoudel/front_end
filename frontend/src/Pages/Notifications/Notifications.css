@@ -1,18 +1,17 @@
-/* Container for the notifications */
+
 .notification-page {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1.5rem;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   }
   
   .notification-page h2 {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #1f2937; /* dark slate */
+    color: #1f2937; 
   }
   
   .notification-list {
@@ -25,39 +24,39 @@
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
-    border: 1px solid #e5e7eb; /* light gray */
+    border: 1px solid #e5e7eb;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    background-color: #f9fafb; /* light background */
+    background-color: #f9fafb; 
     transition: background-color 0.3s ease;
   }
   
   .notification-item.unread {
-    background-color: #e0f2fe; /* light blue for unread */
+    background-color: #e0f2fe; 
     font-weight: 600;
   }
   
   .notification-item.read {
     background-color: #f9fafb;
-    color: #6b7280; /* gray-500 */
+    color: #6b7280; 
   }
   
   .notification-item p {
     font-size: 1rem;
     margin: 0;
-    color: #111827; /* slate-900 */
+    color: #111827; 
   }
   
   .notification-item span {
     font-size: 0.875rem;
-    color: #6b7280; /* gray-500 */
+    color: #6b7280;
   }
   
   .actions button {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    background-color: #3b82f6; /* blue-500 */
+    background-color: #3b82f6; 
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -67,7 +66,7 @@
   }
   
   .actions button:hover {
-    background-color: #2563eb; /* blue-600 */
+    background-color: #2563eb; 
   }
   
   /* Responsive styles */
