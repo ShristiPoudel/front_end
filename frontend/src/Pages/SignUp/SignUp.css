@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding-top:80px ;
+    padding-bottom: 80px;
     width: 100%;
     background: #f4f4f4;
 }
@@ -98,3 +99,12 @@ height: 52px;
     padding: 10px;
     font-size: 19px;
 }
+
+
+@media screen  and (max-width:400px){
+
+    .signup{
+        width: 80% !important;
+    }
+}
+    

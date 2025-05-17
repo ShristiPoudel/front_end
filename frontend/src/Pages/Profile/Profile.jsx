@@ -147,7 +147,8 @@ const Profile = () => {
           {myEvents.length === 0 ? (
             <p>No events created yet.</p>
           ) : (
-            <div className="template-design">
+            <div className="template-container">
+              <div className="template-design">
               {myEvents.map((event) => (
                 <EventCard
                   key={event.id}
@@ -157,6 +158,8 @@ const Profile = () => {
                   onBuyTicket={() => {}}
                 />
               ))}
+            </div>
+              
               <button
                 className="create-event-button"
                 onClick={() => navigate('/organizer-dashboard/create-events')}
@@ -203,7 +206,8 @@ const Profile = () => {
           {favorites.length === 0 ? (
             <p>You have not marked any events as favorite yet.</p>
           ) : (
-            <div className="template-design">
+           <div className="template-container">
+             <div className="template-design">
               {favorites.map(event => (
                 <EventCard
                   key={event.id}
@@ -212,6 +216,7 @@ const Profile = () => {
                 />
               ))}
             </div>
+           </div>
           )}
         </div>
       )}

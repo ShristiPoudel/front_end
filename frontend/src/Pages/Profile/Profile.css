@@ -1,6 +1,5 @@
 .profile-wrapper {
   width: 100%;
-   margin: 40px;
 }
 
 
@@ -10,20 +9,11 @@
   gap: 50px; 
   height: 200px;
   width: 95%;
+  margin-top: 40px;
   margin-bottom: 20px;
   border-bottom: 1px solid #edeaea;
   padding-bottom: 20px;
 }
-
-/* .profile-photo img {
-  margin-left: 70px;
-  width: 200px;
-  height: 500px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #555;
-} */
-
 
 .profile-photo {
   display: flex;
@@ -51,23 +41,13 @@
   display: none;
 }
 
-/* .upload-btn {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #1e293b;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.my-bar{
+  margin-left: 40px;
 }
 
-.upload-btn:hover {
-  background-color: #374151;
-} */
-
+.my-bar li{
+  font-size: 1.2rem;
+}
 
 .profile-info {
    flex: 1; 
@@ -88,7 +68,6 @@
   display: flex;
   gap: 5px;
 }
-
 
 .class button {
   background-color:#3657e7;
@@ -215,3 +194,31 @@
   color: #333;
 }
 
+@media screen  and (max-width:700px){
+
+  .profile-section{
+    flex-direction: column;
+    border-bottom: 0px;
+  }
+
+  .my-bar{
+    margin-top: 140px;
+  }
+
+  .profile-photo{
+    margin-left: 0px;
+  }
+
+  
+}
+
+@media screen  and (max-width:450px){
+  .profile-header{
+    flex-direction: column;
+    gap:10px
+  }
+
+  .profile-role, .profile-bio{
+    margin-left: 30px;
+  }
+}

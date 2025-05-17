@@ -79,7 +79,7 @@ const CreateEvent = () => {
   return (
     <div className="create-container">
       <ToastContainer />
-      <div className="create-event">
+      <div className="create-event-one">
         <h1>Create an Event</h1>
         {error && <div className="error-message">{JSON.stringify(error)}</div>}
         
