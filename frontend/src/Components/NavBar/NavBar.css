@@ -188,6 +188,22 @@
   color: #526D82;
 }
 
+
+.notification-wrapper {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
 /* Icons */
 .profile-iconham,
 .notification-iconham {
@@ -248,6 +264,9 @@
       display: none;
     }
     .notification-icon{
+      display: none;
+    }
+    .log-in-btn{
       display: none;
     }
   }

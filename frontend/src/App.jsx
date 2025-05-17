@@ -23,6 +23,7 @@ import EditEvent from './Pages/EditEvent/EditEvent';
 import EditProfile from './Pages/EditProfile/EditProfile';
 import MyTicket from './Pages/MyTicket/MyTicket'
 import DiscoverEvents from './Pages/DiscoverEvents/DiscoverEvents';
+import Notifications from './Pages/Notifications/Notifications';
 
 
 
@@ -47,7 +48,8 @@ const App = () => {
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path='/buy-ticket' element={<BuyTicket/>}/>
             <Route path='/edit-profile' element={<EditProfile/>}/>
-            <Route path="/discover-events" element={<DiscoverEvents />} />
+            <Route path='/discover-events' element={<DiscoverEvents />} />
+            <Route path='/notifications' element={<Notifications/>}/>
 
          
 

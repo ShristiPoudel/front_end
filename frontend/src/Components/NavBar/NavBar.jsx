@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './NavBar.css';
 import logo from '../../assets/logo.png';
 import logo1 from '../../assets/logo1.png'
@@ -8,13 +8,21 @@ import { CgProfile } from 'react-icons/cg';
 import { FaSearch } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import { IoMdNotificationsOutline } from "react-icons/io";
+import api from '../../api/config'
+import axios  from 'axios';
+import { useNotifications } from '../../context/NotificationContext';
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { unreadCount } = useNotifications();
+
+
 const toggleMenu = () => setMenuOpen(prev => !prev);
 
   const { user, isLoggedIn } = useAuth();
   const userRole = user?.role;
+
+
 
   return (
     <div className="navbar">
@@ -67,8 +75,9 @@ const toggleMenu = () => setMenuOpen(prev => !prev);
             <Link to="/profile">
               <CgProfile className="profile-icon" />
             </Link>
-            <Link to= "/notifications">
-            <IoMdNotificationsOutline className='notification-icon' />
+            <Link to="/notifications" className="notification-wrapper">
+              <IoMdNotificationsOutline className="notification-icon" />
+              {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
             </Link>
           </>
         )}
@@ -91,9 +100,10 @@ const toggleMenu = () => setMenuOpen(prev => !prev);
            <Link to="/profile">
               <CgProfile className="profile-iconham" />
             </Link>
-            <Link to= "/notifications">
-            <IoMdNotificationsOutline className='notification-iconham' />
-            </Link>
+             <Link to="/notifications" className="notification-wrapper">
+                    <IoMdNotificationsOutline className="notification-iconham" />
+                    {unreadCount > 0 && <span className="notification-badge-ham">{unreadCount}</span>}
+                  </Link>
             <button className="log-out-btnham">
               <Link to="/log-out">Logout</Link>
             </button>
