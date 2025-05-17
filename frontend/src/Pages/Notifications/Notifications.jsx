@@ -1,12 +1,10 @@
 import React from 'react';
 import { useNotifications } from '../../context/NotificationContext';
 import './Notifications.css';
-import { useNavigate } from 'react-router-dom';
 
 
 const Notifications = () => {
   const { notifications, markAsRead, markAsUnread, loading } = useNotifications();
-  const navigate = useNavigate();
 
   if (loading) return <p>Loading notifications...</p>;
 

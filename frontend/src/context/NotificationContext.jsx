@@ -1,52 +1,35 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
-  const { token } = useAuth();
+  const { user } = useAuth();            
+  const token = user?.token;             
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
-  
   const fetchNotifications = async () => {
-    const token = localStorage.getItem('authToken');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-
+    if (!token) return;
 
     try {
       const headers = { Authorization: `Token ${token}` };
       const res = await axios.get('http://127.0.0.1:8000/notifications/', { headers });
       setNotifications(res.data);
-      setLoading(false);
     } catch (err) {
       console.error('Failed to fetch notifications', err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchNotifications();
-  }, [token]);
-  
   const markAsRead = async (id) => {
-    try {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
+    if (!token) return;
 
-      const headers = {
-        Authorization: `Token ${token}`,
-      };
-      await axios.put(`http://127.0.0.1:8000/notifications/${id}/read/`, {}, {
-        headers});
+    try {
+      const headers = { Authorization: `Token ${token}` };
+      await axios.put(`http://127.0.0.1:8000/notifications/${id}/read/`, {}, { headers });
       setNotifications((prev) =>
         prev.map((n) => (n.id === id ? { ...n, is_read: true } : n))
       );
@@ -56,19 +39,19 @@ export const NotificationProvider = ({ children }) => {
   };
 
   const markAsUnread = (id) => {
-    // Optional endpoint; for frontend toggle:
     setNotifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, is_read: false } : n))
     );
   };
 
   useEffect(() => {
-    if (!token) return;
-  
-    fetchNotifications(); // your fetch function that uses token
+    if (token) {
+      console.log('🔁 useEffect triggered. Token:', token);
+      fetchNotifications();
+    }
   }, [token]);
 
-  const unreadCount = notifications.filter(n => !n.is_read).length;
+  const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
     <NotificationContext.Provider
