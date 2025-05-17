@@ -204,6 +204,21 @@
   padding: 2px 6px;
 }
 
+.profile-avatar-icon,
+.profile-avatar-iconham {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #555;
+  object-fit: cover;
+  margin-left: 16px;
+}
+
+.profile-avatar-iconham {
+  width: 32px;
+  height: 32px;
+  margin-left: 0px;
+}
 
 
 /* Icons */
@@ -272,6 +287,9 @@
       display: none;
     }
     .notification-badge{
+      display: none;
+    }
+    .profile-avatar-icon{
       display: none;
     }
   }

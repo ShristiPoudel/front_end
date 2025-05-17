@@ -4,6 +4,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaPinterest } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,16 +18,15 @@ const Footer = () => {
           <div className="footer-column">
             <h3>EVENTS</h3>
             <ul>
-              <li><a href="#">Upcoming Events</a></li>
-              <li><a href="#">Popular Events</a></li>
-              <li><a href="#">Categories</a></li>
+            <li><Link to="/events">Categories</Link></li>
+              <li><Link to="/">Popular Events</Link></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h3>ABOUT</h3>
             <ul>
-              <li><a href="#">Our Story</a></li>
+              <li><Link to = "aboutus">Our Story</Link></li>
               <li><a href="#">Team</a></li>
             </ul>
           </div>
@@ -34,7 +34,7 @@ const Footer = () => {
           <div className="footer-column">
             <h3>SUPPORT</h3>
             <ul>
-              <li><a href="#">Contact Us</a></li>
+              <li><Link to ="/contactus">Contact Us</Link></li>
               <li><a href="#">FAQ</a></li>
               <li><a href="#">Privacy Policy</a></li>
             </ul>
