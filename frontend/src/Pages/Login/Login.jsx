@@ -115,6 +115,10 @@ const Login = () => {
             </button>
           </div>
         </form>
+
+        <p className="login-links">
+           <Link to="/reset-password-request">Forgot your password? </Link>
+        </p>
         <p>
           Don't have an account? <Link to="/sign-up">Sign Up</Link>
         </p>

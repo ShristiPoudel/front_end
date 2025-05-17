@@ -24,6 +24,8 @@ import EditProfile from './Pages/EditProfile/EditProfile';
 import MyTicket from './Pages/MyTicket/MyTicket'
 import DiscoverEvents from './Pages/DiscoverEvents/DiscoverEvents';
 import Notifications from './Pages/Notifications/Notifications';
+import ResetPass from './Pages/ResetPassword/ResetPass';
+import ResetRequest from './Pages/ResetPassword/ResetRequest';
 
 
 
@@ -51,7 +53,9 @@ const App = () => {
             <Route path='/discover-events' element={<DiscoverEvents />} />
             <Route path='/notifications' element={<Notifications/>}/>
 
-         
+
+            <Route path="/reset-password-request" element={<ResetRequest />} />
+            <Route path="/reset-password" element={<ResetPass />} />
 
 
             {/* Auth-only (common) */}

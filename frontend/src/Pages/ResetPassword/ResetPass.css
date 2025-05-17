@@ -1,0 +1,120 @@
+.reset-container {
+    max-width: 400px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reset-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+  }
+  
+  .reset-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reset-form label {
+    font-weight: 500;
+    margin: 12px 0 6px;
+  }
+  
+  .reset-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .reset-form input:focus {
+    border-color: #007bff;
+  }
+  
+  .reset-form button {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    background-color:#2C9CF0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .reset-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .reset-form button:hover:not(:disabled) {
+    background-color: #1b7dc4;
+  }
+  
+  
+  /* src/Pages/resetpass/ResetPass.css */
+  
+  .reset-pass-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #f5f8fa;
+  }
+  
+  .reset-pass-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reset-pass-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .reset-pass-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .reset-pass-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .reset-pass-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2C9CF0 ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-pass-form button:hover {
+    background-color: #1b7dc4;
+  }
+  
+  .reset-pass-form .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
